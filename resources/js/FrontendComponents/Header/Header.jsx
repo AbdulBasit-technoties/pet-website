@@ -15,7 +15,7 @@ export default function Header() {
                         <div className="grid grid-cols-12 items-center">
                             <div className="col-span-3">
                                 <div className="logo">
-                                    <Link className="block w-[200px] 2xl:w-[240px]">
+                                    <Link href={route('home')} className="block w-[200px] 2xl:w-[240px]">
                                         <img
                                             src="/FrontendImages/logo.webp"
                                             alt="Logo"
