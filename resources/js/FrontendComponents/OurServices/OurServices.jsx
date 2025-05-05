@@ -25,10 +25,10 @@ export default function OurServices() {
   ];
   return (
     <Fragment>
-      <section id="service">
-        <div className="container mx-auto">
+      <section id="service" className='py-[80px] 2xl:py-[100px]'>
+        <div className="container mx-auto 2xl:px-[50px] px-[40px]">
           <div className="text-center">
-            <h2 className="text-5xl font-semibold capitalize text-c5 mb-14">
+            <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px]">
               Our Services
             </h2>
           </div>
@@ -43,7 +43,7 @@ export default function OurServices() {
                       className="w-16 h-16 object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-c3 xl:px-16 sm:px-8 mt-5">{item.title}</h3>
+                  <h3 className="text-[18px] 2xl:text-xl font-medium text-c3 px-8 mt-5">{item.title}</h3>
                 </div>
               );
             })}

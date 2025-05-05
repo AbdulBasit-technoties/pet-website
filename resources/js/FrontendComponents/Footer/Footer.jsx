@@ -8,12 +8,12 @@ import { FaLinkedinIn } from "react-icons/fa6";
 export default function Footer() {
     return (
         <Fragment>
-            <footer className="footer bg-c1 text-white pt-[100px]">
-                <div className="container mx-auto">
+            <footer className="footer bg-c1 text-white 2xl:pt-[100px] pt-[80px]">
+                <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                     <div className="grid grid-cols-12">
                         <div className="col-span-5">
                             <div className="footer-logo-main pe-[150px]">
-                                <Link className="block w-[240px]">
+                                <Link className="block w-[200px] 2xl:w-[240px]">
                                     <img
                                         src="/FrontendImages/white-logo.png"
                                         alt="Logo"

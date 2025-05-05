@@ -7,15 +7,15 @@ import { FaRegStar } from "react-icons/fa6";
 export default function Testimonial() {
     return (
         <Fragment>
-            <section className="testimonial mt-[-100px] relative mb-[100px]">
+            <section className="testimonial mt-[-60px] 2xl:mt-[-100px] relative 2xl:mb-[100px] mb-[80px]">
                 <div className="container mx-auto">
-                    <div className="grid grid-cols-12 shadow-md mx-[150px]">
+                    <div className="grid grid-cols-12 shadow-md mx-[100px] 2xl:mx-[150px]">
                         <div className="col-span-6">
                             <div className="testi-item bg-c1 text-white py-[30px] px-[30px] h-full">
                                 <h3 className="text-[28px] font-light capitalize mb-[20px]">
                                     What they say?
                                 </h3>
-                                <p className="pe-[200px] text-[18px] mb-[30px]">
+                                <p className="pe-[150px] 2xl:pe-[200px] text-[18px] mb-[30px]">
                                     Lorem ipsum dolor sit amet consectetur.
                                     Cursus volutpat aliquet mauris mauris
                                     fringilla bibendum lorem sed. Nec amet neque

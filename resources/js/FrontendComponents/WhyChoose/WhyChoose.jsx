@@ -2,21 +2,21 @@ import React, { Fragment } from "react";
 export default function WhyChoose() {
     return (
         <Fragment>
-            <section className="xl:py-20 lg:py-14 md:py-10 work bg-custbg">
-                <div className="container mx-auto xl:px-14 lg:px-10 md:px-14">
-                    <div className="grid items-center lg:grid-cols-2 xl:gap-14 lg:gap-8">
+            <section className="py-[80px] 2xl:py-[100px] work bg-custbg">
+                <div className="container mx-auto 2xl:px-[50px] px-[40px]">
+                    <div className="grid items-center grid-cols-2 gap-x-[100px]">
                         <div className="">
-                            <h6 className="mb-4 text-2xl font-medium xl:text-3xl text-c1">
+                            <h6 className="mb-4 text-[20px] 2xl:text-[24px] font-medium text-c1">
                                 How it work?
                             </h6>
-                            <h2 className="mb-10 text-4xl font-semibold capitalize xl:text-5xl xl:mb-16 text-c5">
+                            <h2 className="text-[#404040] capitalize text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px]">
                                 the amazing steps of our Services
                             </h2>
-                            <div className="flex gap-4 xl:gap-8 item-center">
-                                <span className='relative flex items-center justify-center h-16 text-2xl font-semibold w-44 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-80px]  before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
+                            <div className="flex gap-10 item-center mb-[70px]">
+                                <span className='relative flex items-center justify-center h-16 text-2xl font-semibold w-44 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-90px]  before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
                                     1
                                 </span>
-                                <div className="mt-6">
+                                <div className="mt-5">
                                     <span className="block mb-1 text-xl text-black xl:text-2xl">
                                         Lorem ipsum{" "}
                                     </span>
@@ -29,11 +29,11 @@ export default function WhyChoose() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-4 mt-10 xl:gap-8 2xl:mt-16 item-center">
-                                <span className='relative flex items-center justify-center w-44  text-2xl font-semibold h-16 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-80px] before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
+                            <div className="flex gap-10 item-center mb-[70px]">
+                                <span className='relative flex items-center justify-center w-44  text-2xl font-semibold h-16 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-90px] before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
                                     2
                                 </span>
-                                <div className="mt-6">
+                                <div className="mt-5">
                                     <span className="block mb-1 text-xl text-black xl:text-2xl">
                                         Lorem ipsum{" "}
                                     </span>
@@ -46,11 +46,11 @@ export default function WhyChoose() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-4 xl:gap-8 2xl:mt-16 xl:mt-10 item-center">
+                            <div className="flex gap-10 item-center mb-[70px]">
                                 <span className="relative flex items-center justify-center h-16 text-2xl font-semibold w-44 rounded-xl text-c4 bg-c1 ">
                                     3
                                 </span>
-                                <div className="mt-6">
+                                <div className="mt-5">
                                     <span className="block mb-1 text-xl text-black xl:text-2xl ">
                                         Lorem ipsum{" "}
                                     </span>

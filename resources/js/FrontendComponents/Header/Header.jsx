@@ -11,11 +11,11 @@ export default function Header() {
         <Fragment>
             <header className="header">
                 <div className="top-header py-[20px]">
-                    <div className="container mx-auto">
+                    <div className="container mx-auto 2xl:px-[50px] xl:px-[40px]">
                         <div className="grid grid-cols-12 items-center">
                             <div className="col-span-3">
                                 <div className="logo">
-                                    <Link className="block w-[240px]">
+                                    <Link className="block w-[200px] 2xl:w-[240px]">
                                         <img
                                             src="/FrontendImages/logo.webp"
                                             alt="Logo"
@@ -45,20 +45,20 @@ export default function Header() {
                                 <div className="head-btns flex justify-end items-center gap-[10px]">
                                     <ul className="flex items-center gap-[10px]">
                                         <li>
-                                            <Link
+                                            <a
                                                 href="tel:"
                                                 className="w-[46px] h-[46px] bg-custbg flex items-center justify-center rounded text-[rgba(77, 82, 103, 1)] text-[24px] transition-all duration-500 hover:bg-c1 hover:text-white"
                                             >
                                                 <IoCallOutline />
-                                            </Link>
+                                            </a>
                                         </li>
                                         <li>
-                                            <Link
+                                            <a
                                                 href="mailto:"
                                                 className="w-[46px] h-[46px] bg-custbg flex items-center justify-center rounded text-[rgba(77, 82, 103, 1)] text-[24px] transition-all duration-500 hover:bg-c1 hover:text-white"
                                             >
                                                 <MdOutlineEmail />
-                                            </Link>
+                                            </a>
                                         </li>
                                     </ul>
                                     <OutLineButton
@@ -72,7 +72,7 @@ export default function Header() {
                     </div>
                 </div>
                 <div className="main-header bg-custbg py-[15px]">
-                    <div className="container mx-auto">
+                    <div className="container mx-auto 2xl:px-[50px] xl:px-[40px]">
                         <div className="grid grid-cols-1 items-center">
                             <Navbar />
                         </div>

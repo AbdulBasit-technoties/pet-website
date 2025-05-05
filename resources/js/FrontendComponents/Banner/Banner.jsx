@@ -8,19 +8,19 @@ export default function Banner() {
             <section className="main-banner">
                 <div className="banner relative">
                     <div className="banner-img">
-                      <img src="/FrontendImages/banner-bg.webp" alt="Image" />
+                      <img src="/FrontendImages/banner-bg.webp" alt="Image" className="h-[750px] w-full 2xl:h-[900px] object-cover" />
                     </div>
-                    <div className="banner-content pt-[150px] absolute top-0 left-0 w-full h-full">
-                        <div className="container mx-auto">
+                    <div className="banner-content pt-[100px] 2xl:pt-[150px] absolute top-0 left-0 w-full h-full">
+                        <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                             <div className="grid grid-cols-12 items-center">
                                 <div className="col-span-5">
                                     <div className="banner-title">
-                                        <h1 className="text-white text-[60px] leading-[1.3] mb-[20px]">
+                                        <h1 className="text-white text-[40px] 2xl:text-[60px] leading-[1.3] mb-[20px]">
                                             Your{" "}
                                             <span className="text-c2">Trusted Pet Relocation</span>{" "}
                                             Partner
                                         </h1>
-                                        <p className="text-white text-[20px] mb-[40px]">
+                                        <p className="text-white text-[18px] 2xl:text-[20px] mb-[40px]">
                                             Our dedicated team understands the
                                             unique bond you share with your
                                             furry companions, and we're
@@ -28,7 +28,7 @@ export default function Banner() {
                                             stress-free experience for both you
                                             and your pets.
                                         </p>
-                                        <Link className="border-2 border-white rounded-[50px] py-[10px] px-[40px] flex items-center w-max text-[22px] text-white transition-all duration-500 hover:bg-white hover:text-c1 font-medium">
+                                        <Link className="border-2 border-white rounded-[50px] py-[10px] px-[30px] 2xl:px-[40px] flex items-center w-max text-[18px] 2xl:text-[22px] text-white transition-all duration-500 hover:bg-white hover:text-c1 font-medium">
                                             Get a Quote
                                             <FaArrowRight className="ml-[20px]" />
                                         </Link>

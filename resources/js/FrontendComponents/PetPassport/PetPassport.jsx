@@ -1,13 +1,13 @@
 import { Link } from "@inertiajs/react";
 import React, { Fragment } from "react";
-import { IoMdArrowRoundForward } from "react-icons/io";
+import { FaArrowRight } from "react-icons/fa6";
 export default function PetPassport() {
     return (
         <Fragment>
-            <section className="py-20 pre-friendly">
-                <div className="container mx-auto">
+            <section className="py-[80px] 2xl:py-[100px] pre-friendly">
+                <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                     <div className="text-center">
-                        <h2 className="text-5xl font-semibold capitalize text-c5 mb-14 md:text-5xl">
+                        <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px]">
                             Pet Passport and Microchipping Services
                         </h2>
                     </div>
@@ -20,7 +20,7 @@ export default function PetPassport() {
                             />
                         </div>
                         <div className="ml-auto md:w-3/4 fre-con-main">
-                            <p className="text-xl font-medium text-l md:text-2xl text-c3 ">
+                            <p className="text-[18px] 2xl:text-[22px] text-c3 mb-[40px]">
                                 Navigate international regulations effortlessly
                                 with our comprehensive pet passport and
                                 microchipping services, ensuring your pets are
@@ -28,12 +28,10 @@ export default function PetPassport() {
                             </p>
                             <Link
                                 href="/"
-                                className="block px-8 py-3 mt-8 text-xl font-semibold border-2 rounded-full md:border-4 md:text-2xl md:px-12 md:mt-10 border-c1 w-max text-c1 "
+                                className="border-2 border-c1 rounded-[50px] py-[10px] px-[30px] 2xl:px-[40px] flex items-center w-max text-[18px] 2xl:text-[22px] text-c1 transition-all duration-500 hover:bg-c1 hover:text-white font-medium"
                             >
                                 Get a Quote
-                                <span className="">
-                                    <IoMdArrowRoundForward className="inline-block text-2xl md:text-3xl ms-2" />
-                                </span>
+                                <FaArrowRight className="ml-[20px]" />
                             </Link>
                         </div>
                     </div>

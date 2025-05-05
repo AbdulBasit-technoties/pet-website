@@ -1,34 +1,34 @@
 import { Link } from "@inertiajs/react";
 import React, { Fragment } from "react";
-import { IoMdArrowRoundForward } from "react-icons/io";
+import { FaArrowRight } from "react-icons/fa6";
 export default function OurTeam() {
     return (
         <Fragment>
-            <section className="pb-20 pre-friendly">
-                <div className="container mx-auto">
+            <section className="py-[80px] 2xl:py-[100px] pre-friendly">
+                <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                     <div className="text-center">
-                        <h2 className="mb-20 text-5xl font-semibold capitalize text-c5 md:text-5xl">
+                        <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px]">
                             Our Team
                         </h2>
                     </div>
                     <div className="grid items-center justify-between grid-cols-1 gap-8 md:grid-cols-2 md:gap-0">
-                        <div className=" md:w-4/5 fre-con-main">
+                        <div className="md:w-4/5 fre-con-main">
                             <div className="flex items-center gap-5 mb-8">
                                 <img
                                     src="/FrontendImages/Ellipse 4_compressed.webp"
                                     alt=""
-                                    className="w-24 h"
+                                    className="w-[80px] 2xl:w-24 h"
                                 />
                                 <div className="">
-                                    <h6 className="mb-1 text-2xl font-bold text-c5">
+                                    <h6 className="mb-1 text-[18px] 2xl:text-2xl font-bold text-c5">
                                         Philip Adam
                                     </h6>
-                                    <span className="block text-xl font-medium text-c3">
+                                    <span className="block text-[16px] 2xl:text-xl font-medium text-c3">
                                         Owner
                                     </span>
                                 </div>
                             </div>
-                            <p className="text-xl font-medium text-l md:text-2xl text-c3 ">
+                            <p className="text-[18px] 2xl:text-[22px] text-c3 mb-[40px]">
                                 [Name of author] is a writer and expert on
                                 dating and relationships. He has helped
                                 thousands of men find love and happiness through
@@ -41,12 +41,10 @@ export default function OurTeam() {
                             </p>
                             <Link
                                 href="/"
-                                className="block px-8 py-3 mt-8 text-xl font-semibold border-2 rounded-full md:border-4 md:text-2xl md:px-12 md:mt-10 border-c1 w-max text-c1 "
+                                className="border-2 border-c1 rounded-[50px] py-[10px] px-[30px] 2xl:px-[40px] flex items-center w-max text-[18px] 2xl:text-[22px] text-c1 transition-all duration-500 hover:bg-c1 hover:text-white font-medium"
                             >
-                                Get a Quote
-                                <span className="">
-                                    <IoMdArrowRoundForward className="inline-block text-2xl md:text-3xl ms-2" />
-                                </span>
+                                Contact Us
+                                <FaArrowRight className="ml-[20px]" />
                             </Link>
                         </div>
                         <div className="flex justify-center fre-con-img">

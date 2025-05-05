@@ -10,14 +10,14 @@ export default function WeCare() {
                         <img src="/FrontendImages/wecare-bg.webp" alt="Image" />
                     </div>
                     <div className="we-care-content absolute top-0 left-0 w-full h-full flex items-center">
-                        <div className="container mx-auto">
+                        <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                             <div className="grid grid-cols-12">
                                 <div className="col-span-12">
                                     <div className="we-care-title text-center">
                                         <button className="w-[80px] h-[80px] bg-c1 rounded-[50%] flex items-center justify-center mx-auto text-white text-[30px] hover:bg-black transition-all duration-500">
                                             <FaPlay />
                                         </button>
-                                        <h2 className="text-[40px] text-white capitalize mt-[20px] mb-[15px]">
+                                        <h2 className="text-[34px] 2xl:text-[40px] text-white capitalize mt-[20px] mb-[15px]">
                                             We Care with compasssion
                                         </h2>
                                         <p className="text-white text-[18px] w-[600px] mx-auto">
