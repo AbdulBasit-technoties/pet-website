@@ -1,131 +1,156 @@
-import { useState } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-
+import { useEffect, useState } from "react";
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import Dropdown from "@/Components/Dropdown";
+import { Link, usePage } from "@inertiajs/react";
+import { MdMenu } from "react-icons/md";
+import usePermissions from "@/Hooks/usePermissions";
+import { IoSettings } from "react-icons/io5";
+import { FaTachometerAlt } from "react-icons/fa";
+import SidebarLink from "@/Components/SidebarLink";
+import { FaCriticalRole } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
 export default function Authenticated({ auth, header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const { flash } = usePage().props;
+    useEffect(() => {
+        if (flash && flash.message) {
+            toast.success(flash.message); // Show success toast
+        }
+        if (flash && flash.error) {
+            toast.error(flash.error); // Show success toast
+        }
+    }, [flash]);
+    const { can } = usePermissions();
+    const roles = auth.user.roles.map((role) => role.name);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(window.innerWidth >= 1280);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1280) {
+                setIsDrawerOpen(true);
+            } else {
+                setIsDrawerOpen(false);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
+            <nav className="bg-white fixed top-0 w-full left-0 z-50">
+                <div className="px-[10px] lg:px-[20px] py-[10px]">
+                    <div className="flex items-center justify-between flex-col lg:flex-row gap-y-4 sm:gap-y-0">
+                        <div className="flex items-center lg:gap-[70px] w-full lg:w-auto justify-between lg:justify-auto">
+                            <Link href="/">
+                                <ApplicationLogo />
+                            </Link>
+                            <div className="flex">
+                                <button
+                                    onClick={() =>
+                                        setIsDrawerOpen(!isDrawerOpen)
+                                    }
+                                >
+                                    <MdMenu className="text-[30px] text-primary" />
+                                </button>
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ml-6">
-                            <div className="ml-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {auth.user.name}
-
-                                                <svg
-                                                    className="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
+                        <div className="flex items-center w-full lg:w-auto justify-end lg:justify-auto">
+                            <div className="flex items-center w-full sm:w-auto justify-center sm:justify-auto">
+                                <div className="flex items-center">
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <button className="px-3 py-2 font-medium rounded-md bg-c1 text-white">
+                                                <IoSettings />
                                             </button>
-                                        </span>
-                                    </Dropdown.Trigger>
+                                        </Dropdown.Trigger>
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
+                                        <Dropdown.Content>
+                                            <Dropdown.Link
+                                                href={route("profile.edit")}
+                                            >
+                                                Profile
+                                            </Dropdown.Link>
+
+                                            <Dropdown.Link
+                                                href={route("logout")}
+                                                method="post"
+                                                as="button"
+                                            >
+                                                Log Out
+                                            </Dropdown.Link>
+                                        </Dropdown.Content>
+                                    </Dropdown>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="-mr-2 flex items-center sm:hidden">
-                            <button
-                                onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                            >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">
-                                {auth.user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
+            <main className="grid grid-cols-12">
+            <ToastContainer />
 
-            <main className='grid grid-cols-12'>
-                <div className="col-span-2">
-                    
-                </div>
-                <div className="col-span-10">
+                {isDrawerOpen && (
+                    <div
+                        className={`${
+                            isDrawerOpen
+                                ? "fixed z-10 left-0 top-0 xl:w-full sm:w-1/2 w-[80%]"
+                                : ""
+                        } cust-navs-sidebar overflow-y-auto xl:col-span-2 xl:block bg-secondary dark:bg-primary h-screen p-4 pt-[130px] lg:pt-[110px] lg:pt-20 xl:sticky lg:top-0`}
+                    >
+                        <ul>
+                            <h6 className="text-custgray font-medium dark:text-secondary uppercase text-[13px] mb-3 mt-4">
+                                Data
+                            </h6>
+                            <li>
+                                <SidebarLink
+                                    href={route("dashboard")}
+                                    active={route().current("dashboard")}
+                                >
+                                    <span
+                                        className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+            ${
+                route().current("dashboard")
+                    ? "text-[#15ABA2]"
+                    : "dark:text-secondary text-primary group-hover:text-[#15ABA2]"
+            }`}
+                                    >
+                                        <FaTachometerAlt className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />{" "}
+                                        Dashboard
+                                    </span>
+                                </SidebarLink>
+                            </li>
+                            {can("roles.index") && (
+                                <li>
+                                    <SidebarLink
+                                        href={route("roles.index")}
+                                        active={route().current("roles.index")}
+                                    >
+                                        <span
+                                            className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+            ${
+                route().current("roles.index")
+                    ? "text-[#15ABA2]"
+                    : "dark:text-secondary text-primary group-hover:text-[#15ABA2]"
+            }`}
+                                        >
+                                            <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />{" "}
+                                            Roles
+                                        </span>
+                                    </SidebarLink>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                )}
+                <div
+                    className={`${
+                        isDrawerOpen
+                            ? "xl:col-span-10 col-span-12"
+                            : "col-span-12"
+                    } text-primary transition-all duration-500`}
+                >
                     {children}
                 </div>
             </main>

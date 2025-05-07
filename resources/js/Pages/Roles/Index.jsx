@@ -1,0 +1,287 @@
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, Link, router, useForm } from "@inertiajs/react";
+import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import { MdDelete, MdOutlineClose } from "react-icons/md";
+import { FaEdit, FaEye } from "react-icons/fa";
+import InputLabel from "@/Components/InputLabel";
+import TextInput from "@/Components/TextInput";
+import InputError from "@/Components/InputError";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { Transition } from "@headlessui/react";
+
+export default function Index({ auth, role, editData, isEditMode}) {
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(route("roles.destroy", id), {
+                    onSuccess: () =>
+                        Swal.fire(
+                            "Deleted!",
+                            "Your role has been deleted.",
+                            "success"
+                        ),
+                    onError: () =>
+                        Swal.fire(
+                            "Error!",
+                            "There was an issue deleting your role.",
+                            "error"
+                        ),
+                });
+            }
+        });
+    };
+
+    const [editClick, setEditClick] = useState(isEditMode);
+    const {
+        data,
+        setData,
+        post,
+        patch,
+        progress,
+        recentlySuccessful,
+        errors,
+        reset,
+    } = useForm({
+        id: "",
+        name: "",
+    });
+
+    useEffect(() => {
+        if (editClick) {
+            setData({
+                id: editData?.id || "",
+                name: editData?.name || "",
+            });
+        } else {
+            reset(); // for add new
+        }
+    }, [editData, editClick]);
+
+    const handleEditClick = (item) => {
+        setEditClick(true);
+        router.visit(route("roles.index", { id: item.id }), {
+            preserveState: true,
+            only: ["editData", "isEditMode"],
+        });
+    };
+
+    // Submit handler
+    const Datasubmit = (e) => {
+        e.preventDefault();
+        editData
+            ? patch(route("roles.update", editData?.id), {
+                  onSuccess: () => {
+                      reset();
+                      setSidebarState(false);
+                  },
+              })
+            : post(route("roles.store"), {
+                  onSuccess: () => {
+                      reset();
+                      setSidebarState(false);
+                  },
+              });
+    };
+
+    const [sidebarState, setSidebarState] = useState(false);
+    console.log(editData);
+    return (
+        <AuthenticatedLayout auth={auth}>
+            <Head title="Roles" />
+            <div className="px-10 py-52">
+                <div className="flex font-semibold items-center leading-tight text-primary text-xl justify-between mb-4">
+                    <h2 className="text-primary dark:text-secondary">Roles</h2>
+                    <div className="text-primary dark:text-secondary md:text-sm text-xs">
+                        Per page {role.total}/
+                        {role.to || role.length}
+                        <label
+                            onClick={(e) => {
+                                setEditClick(false);
+                                setSidebarState(true);
+                            }}
+                            className="inline-flex items-center ml-4 px-4 py-2 bg-custgreen border border-transparent rounded-2xl text-xs text-white capitalize tracking-widest hover:border-custgreen hover:bg-transparent hover:text-custgreen dark:hover:bg-transparent dark:hover:border-custgreen dark:hover:text-custgreen transition-all duration-500"
+                        >
+                            Add Role
+                        </label>
+                    </div>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="table table-xs w-full table-main border-x border-gray-500/30 dark:border-gray-100/30">
+                        <thead className="dark:bg-transparent bg-gray-300/30 border-t border-b border-gray-500/30 dark:border-gray-100/30 text-primary dark:text-secondary">
+                            <tr className="border-none">
+                                <th className='py-3'>#</th>
+                                <th className='py-3'>Name</th>
+                                <th className='py-3'>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-transparent">
+                            {role.data.map((item, index) => (
+                                <tr
+                                    className="space-y-3 font-medium border-y border-gray-500/20 dark:border-gray-100/30 dark:text-secondary/60"
+                                    key={item.id}
+                                >
+                                    <td className="text-sm py-4">
+                                        {index + 1}
+                                    </td>
+                                    <td className="text-sm py-4">
+                                        {item.name}
+                                    </td>
+                                    <td className="text-sm py-4">
+                                        <div className="flex gap-2">
+                                            <label
+                                                onClick={(e) => {
+                                                    handleEditClick(item);
+                                                    setSidebarState(true);
+                                                }}
+                                                className="text-custgreen dark:text-custgreen text-xl"
+                                            >
+                                                <FaEdit />
+                                            </label>
+                                            <Link
+                                                href={route(
+                                                    "roles.show",
+                                                    item.id
+                                                )}
+                                                className="text-custgreen dark:text-custgreen text-xl"
+                                            >
+                                                <FaEye />
+                                            </Link>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(item.id)
+                                                }
+                                                className="text-custgreen dark:text-custgreen text-xl"
+                                            >
+                                                <MdDelete />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                {role && role.last_page > 1 && (
+                    <div className="join flex justify-center mt-6 w-full">
+                        <Link
+                            href={role.prev_page_url || "#"}
+                            className={`join-item btn ${
+                                role.prev_page_url ? "" : "btn-disabled"
+                            }`}
+                        >
+                            «
+                        </Link>
+                        <button className="join-item btn cursor-default bg-primary text-white">
+                            Page {role.current_page}
+                        </button>
+                        <Link
+                            href={role.next_page_url || "#"}
+                            className={`join-item btn ${
+                                role.next_page_url ? "" : "btn-disabled"
+                            }`}
+                        >
+                            »
+                        </Link>
+                    </div>
+                )}
+            </div>
+
+            <div
+                className={`${
+                    sidebarState === true
+                        ? "visible opacity-1"
+                        : "hidden opacity-0"
+                } z-[50] fixed left-0 top-0 w-[100%] transition-all duration-500 ease overlay-box h-full bg-[#0000006b]`}
+            ></div>
+            <div
+                onClick={(e) => setSidebarState(false)}
+                className={`${
+                    sidebarState === true ? "right-0" : "-right-full"
+                } fixed top-0 w-[100%] transition-all duration-500 ease z-50 h-full overflow-y-auto`}
+            >
+                <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="side-inner w-[35%] ml-auto h-full"
+                >
+                    <ul className="bg-white min-h-full p-0 dark:bg-primary">
+                        <div className="flex justify-between border-b px-[15px] py-[10px]">
+                            <h4 className='text-gray-800 dark:text-secondary font-medium text-[18px]'>
+                                {editClick === true ? "Edit" : "Add New"}{" "}
+                                Role
+                            </h4>
+                            <label
+                                onClick={(e) => setSidebarState(false)}
+                                className="w-[30px] text-custgreen h-[30px] border hover:text-white border-custgreen transition-all duration-500 hover:bg-custgreen rounded-full flex justify-center items-center cursor-pointer"
+                            >
+                                <MdOutlineClose className="w-4 h-4" />
+                            </label>
+                        </div>
+                        <form
+                            onSubmit={Datasubmit}
+                            className="grid grid-cols-12 items-center gap-5 px-[15px] py-[20px]"
+                        >
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="name"
+                                    value={`Name${
+                                        editClick === true ? "" : "*"
+                                    }`}
+                                />
+                                <TextInput
+                                    id="name"
+                                    type="text"
+                                    value={data.name}
+                                    onChange={(e) =>
+                                        setData("name", e.target.value)
+                                    }
+                                    required
+                                    disabled={editClick === true}
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.name} />
+                            </div>
+                            <div className="flex items-center gap-4">
+                                {progress && (
+                                    <progress
+                                        value={progress.percentage}
+                                        max="100"
+                                    >
+                                        {progress.percentage}%
+                                    </progress>
+                                )}
+                                {!editClick === true &&
+                                <PrimaryButton disabled={progress}>
+                                Save
+                            </PrimaryButton>
+                                }
+                                
+                                
+
+                                <Transition
+                                    show={recentlySuccessful}
+                                    enter="transition ease-in-out"
+                                    enterFrom="opacity-0"
+                                    leave="transition ease-in-out"
+                                    leaveTo="opacity-0"
+                                >
+                                    <p className="text-sm text-gray-600">
+                                        Add Brand
+                                    </p>
+                                </Transition>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </AuthenticatedLayout>
+    );
+}

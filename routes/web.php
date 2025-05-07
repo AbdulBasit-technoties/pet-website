@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+Route::resource('roles', RoleController::class);
 Route::resource('services', ServicesController::class,);
 Route::resource('about-us', AboutUsController::class,);
 Route::resource('contact-us', ContactUsController::class,);
