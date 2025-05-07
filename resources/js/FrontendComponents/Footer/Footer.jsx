@@ -13,19 +13,17 @@ export default function Footer() {
                     <div className="grid grid-cols-12">
                         <div className="col-span-5">
                             <div className="footer-logo-main pe-[150px]">
-                                <Link className="block w-[200px] 2xl:w-[240px]">
+                                <Link className="block w-[100px] 2xl:w-[120px]">
                                     <img
-                                        src="/FrontendImages/white-logo.png"
+                                        src="/FrontendImages/logo.png"
                                         alt="Logo"
                                     />
                                 </Link>
-                                <p className="text-[18px] mt-[30px]">
+                                <p className="text-[18px] mt-[20px]">
                                     Lorem ipsum dolor sit amet consectetur.
                                     Nullam molestie a eu sapien sapien egestas.
                                     Ultrices faucibus sit convallis gravida. Et
-                                    gravida risus volutpat integer odio nibh
-                                    tellus. Ut consectetur auctor nunc aliquam
-                                    a. Purus eget eu est amet.
+                                    gravida risus volutpat.
                                 </p>
                             </div>
                         </div>

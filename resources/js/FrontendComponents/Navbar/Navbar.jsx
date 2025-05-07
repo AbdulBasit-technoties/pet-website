@@ -31,6 +31,11 @@ export default function Navbar() {
                             Contact Us
                         </Link>
                     </li>
+                    <li className="overflow-hidden">
+                        <Link href={route('galleries.index')} className="text-[#4d5267] text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                            Gallery
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </Fragment>

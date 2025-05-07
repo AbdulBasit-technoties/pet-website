@@ -8,7 +8,7 @@ export default function ContactUs() {
   return (
     <Fragment>
         <Header />
-        <InnerBanner image="/FrontendImages/wecare-bg.webp" title="Contact Us" />
+        <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="Contact Us" />
         <ContactUsPage/>
         <Footer />
     </Fragment>

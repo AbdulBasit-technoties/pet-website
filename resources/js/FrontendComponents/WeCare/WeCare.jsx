@@ -17,7 +17,7 @@ export default function WeCare() {
                                         <button className="w-[80px] h-[80px] bg-c1 rounded-[50%] flex items-center justify-center mx-auto text-white text-[30px] hover:bg-black transition-all duration-500">
                                             <FaPlay />
                                         </button>
-                                        <h2 className="text-[34px] 2xl:text-[40px] text-white capitalize mt-[20px] mb-[15px]">
+                                        <h2 className="text-[34px] 2xl:text-[40px] text-white capitalize mt-[20px] mb-[15px] font-semibold">
                                             We Care with compasssion
                                         </h2>
                                         <p className="text-white text-[18px] w-[600px] mx-auto">

@@ -4,7 +4,7 @@ export default function InnerBanner({ title, image }) {
     return (
         <Fragment>
             <section
-                className="inner-banner h-[400px] bg-cover bg-center relative before:content-[''] before:w-full before:h-full before:bg-black/60 before:absolute before:left-0 before:top-0"
+                className="bg-fixed inner-banner h-[400px] bg-cover bg-center relative before:content-[''] before:w-full before:h-full before:bg-black/60 before:absolute before:left-0 before:top-0"
                 style={{ backgroundImage: `url(${image})` }}
             >
                 <div className="banner relative flex justify-center items-center h-full">

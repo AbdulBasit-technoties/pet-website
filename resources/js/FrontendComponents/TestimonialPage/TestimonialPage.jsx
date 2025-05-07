@@ -43,8 +43,8 @@ export default function TestimonialPage() {
                                         className="w-[70px]"
                                     />
                                     <div className="author-name">
-                                        <h4>July Benjamin</h4>
-                                        <span>Canada</span>
+                                        <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                        <span className="text-c3 text-lg">Canada</span>
                                     </div>
                                 </div>
                                 <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
@@ -88,8 +88,8 @@ export default function TestimonialPage() {
                                         className="w-[70px]"
                                     />
                                     <div className="author-name">
-                                        <h4>July Benjamin</h4>
-                                        <span>Canada</span>
+                                        <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                        <span className="text-c3 text-lg">Canada</span>
                                     </div>
                                 </div>
                                 <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
@@ -133,8 +133,8 @@ export default function TestimonialPage() {
                                         className="w-[70px]"
                                     />
                                     <div className="author-name">
-                                        <h4>July Benjamin</h4>
-                                        <span>Canada</span>
+                                        <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                        <span className="text-c3 text-lg">Canada</span>
                                     </div>
                                 </div>
                                 <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
@@ -178,8 +178,8 @@ export default function TestimonialPage() {
                                         className="w-[70px]"
                                     />
                                     <div className="author-name">
-                                        <h4>July Benjamin</h4>
-                                        <span>Canada</span>
+                                        <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                        <span className="text-c3 text-lg">Canada</span>
                                     </div>
                                 </div>
                                 <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">

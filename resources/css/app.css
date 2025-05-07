@@ -8,9 +8,16 @@
     body {
       @apply font-sans;
     }
-  
+
     h1, h2, h3, h4, h5, h6 {
       @apply font-heading;
     }
-  }
-  
+
+}
+
+    /* Selection Css */
+
+        ::selection{
+            background: rgba(63, 155, 12, 1);
+            color: #fff;
+        }

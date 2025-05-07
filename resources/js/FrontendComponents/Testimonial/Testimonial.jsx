@@ -12,7 +12,7 @@ export default function Testimonial() {
                     <div className="grid grid-cols-12 shadow-md mx-[100px] 2xl:mx-[150px]">
                         <div className="col-span-6">
                             <div className="testi-item bg-c1 text-white py-[30px] px-[30px] h-full">
-                                <h3 className="text-[28px] font-light capitalize mb-[20px]">
+                                <h3 className="text-[28px] capitalize mb-[20px] font-medium">
                                     What they say?
                                 </h3>
                                 <p className="pe-[150px] 2xl:pe-[200px] text-[18px] mb-[30px]">
@@ -72,8 +72,8 @@ export default function Testimonial() {
                                                 className="w-[70px]"
                                             />
                                             <div className="author-name">
-                                                <h4>July Benjamin</h4>
-                                                <span>Canada</span>
+                                                <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                                <span className="text-c3 text-lg">Canada</span>
                                             </div>
                                         </div>
                                         <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
@@ -117,8 +117,8 @@ export default function Testimonial() {
                                                 className="w-[70px]"
                                             />
                                             <div className="author-name">
-                                                <h4>July Benjamin</h4>
-                                                <span>Canada</span>
+                                                <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                                <span className="text-c3 text-lg">Canada</span>
                                             </div>
                                         </div>
                                         <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
@@ -162,8 +162,8 @@ export default function Testimonial() {
                                                 className="w-[70px]"
                                             />
                                             <div className="author-name">
-                                                <h4>July Benjamin</h4>
-                                                <span>Canada</span>
+                                                <h4 className="text-[#151515] font-medium text-lg">July Benjamin</h4>
+                                                <span className="text-c3 text-lg">Canada</span>
                                             </div>
                                         </div>
                                         <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">

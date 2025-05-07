@@ -7,7 +7,7 @@ export default function OurTeam() {
             <section className="py-[80px] 2xl:py-[100px] pre-friendly">
                 <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                     <div className="text-center">
-                        <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px]">
+                        <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px] font-semibold">
                             Our Team
                         </h2>
                     </div>
@@ -20,7 +20,7 @@ export default function OurTeam() {
                                     className="w-[80px] 2xl:w-24 h"
                                 />
                                 <div className="">
-                                    <h6 className="mb-1 text-[18px] 2xl:text-2xl font-bold text-c5">
+                                    <h6 className="mb-1 text-[20px] 2xl:text-2xl font-bold text-c3">
                                         Philip Adam
                                     </h6>
                                     <span className="block text-[16px] 2xl:text-xl font-medium text-c3">

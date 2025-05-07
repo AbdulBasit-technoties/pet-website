@@ -8,7 +8,7 @@ export default function Services() {
   return (
     <Fragment>
         <Header />
-        <InnerBanner image="/FrontendImages/wecare-bg.webp" title="Our Services" />
+        <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="Our Services" />
         <ServicesPage/>
         <Footer />
     </Fragment>

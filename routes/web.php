@@ -5,6 +5,8 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +34,8 @@ Route::resource('services', ServicesController::class,);
 Route::resource('about-us', AboutUsController::class,);
 Route::resource('contact-us', ContactUsController::class,);
 Route::resource('testimonials', TestimonialController::class,);
+Route::resource('galleries', GalleryController::class,);
+Route::resource('bookings', BookingController::class,);
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

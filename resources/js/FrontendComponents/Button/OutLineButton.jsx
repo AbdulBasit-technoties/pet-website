@@ -2,18 +2,15 @@ import { Link } from "@inertiajs/react";
 import React from "react";
 
 const colorMap = {
-    fill: "bg-green-500 hover:text-green-500 hover:bg-transparent border-green-500",
-    transparet: "bg-black hover:text-black hover:bg-transparent border-black",
+    fill: "bg-c1 text-white hover:bg-transparent hover:text-c1 border-c1",
+    transparent: "bg-black text-white hover:bg-transparent hover:text-black border-black",
 };
 
-export default function OutLineButton({ link, title, css }) {
-    const classes = colorMap[css] || "bg-c1 text-white p-[10px] px-5 rounded hover:bg-transparent hover:text-c1 border border-c1 transition-all duration-500 font-medium";
+export default function OutLineButton({ title, link = "", css = "fill" }) {
+    const classes = `px-4 py-2 border rounded transition duration-300 ${colorMap[css] || css}`;
 
     return (
-        <Link
-            href={link}
-            className={`inline-block ${classes}`}
-        >
+        <Link href={link} className={classes}>
             {title}
         </Link>
     );

@@ -24,8 +24,8 @@ export default function ContactUsPage() {
                                     </h4>
                                     <Link
                                         className='text-sm'
-                                        href="mailto:info@petwebsite.com">
-                                        info@petwebsite.com
+                                        href="mailto:Abbeyfarmbusiness@outlook.com">
+                                        Abbeyfarmbusiness@outlook.com
                                     </Link>
                                 </div>
                            </div>
@@ -39,8 +39,8 @@ export default function ContactUsPage() {
                                     </h4>
                                     <Link
                                         className='text-sm'
-                                        href="telto:123 456 7890">
-                                        123 456 7890
+                                        href="telto:07791043791">
+                                        07791043791
                                     </Link>
                                 </div>
                            </div>
@@ -68,14 +68,14 @@ export default function ContactUsPage() {
                                         <input
                                             type="text"
                                             placeholder="Your Name"
-                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
+                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-c1"
                                         />
                                     </div>
                                     <div className="col-span-6">
                                         <input
                                             type="email"
                                             placeholder="Your E.mail"
-                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
+                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-c1"
                                         />
                                     </div>
                                     <div className="col-span-12">
@@ -83,7 +83,7 @@ export default function ContactUsPage() {
                                             type="number"
                                             placeholder="123-456-7890"
                                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
+                                            className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-c1"
                                         />
                                     </div>
                                     <div className="col-span-12">
@@ -91,7 +91,7 @@ export default function ContactUsPage() {
                                             name=""
                                             id=""
                                             placeholder="Your Message"
-                                            className="w-full px-8 py-4 mb-3 font-medium border-0 outline-none resize-none h-44 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
+                                            className="w-full px-8 py-4 mb-3 font-medium border-0 outline-none resize-none h-44 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-c1"
                                         ></textarea>
                                     </div>
                                 </div>

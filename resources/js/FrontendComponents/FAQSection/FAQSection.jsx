@@ -27,7 +27,7 @@ export default function FAQSection() {
       <section className="bg-custbg py-14 px-4 sm:px-6 lg:px-8">
         <div className='container mx-auto 2xl:px-[50px] px-[40px]'>
           <div className="text-center">
-            <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[60px] mb-[50px]">
+            <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[60px] mb-[50px] font-semibold">
               Frequently Asked Question's
             </h2>
           </div>

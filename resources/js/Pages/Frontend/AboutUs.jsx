@@ -10,7 +10,7 @@ export default function AboutUs() {
     return (
         <Fragment>
             <Header />
-            <InnerBanner image="/FrontendImages/wecare-bg.webp" title="About Us" />
+            <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="About Us" />
             <WhoWeAre/>
             <FAQSection/>
             <WhatWeDo/>

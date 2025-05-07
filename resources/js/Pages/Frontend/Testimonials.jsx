@@ -9,7 +9,7 @@ export default function Testimonials() {
   return (
     <Fragment>
          <Header />
-         <InnerBanner image="/FrontendImages/wecare-bg.webp" title="Testimonials" />
+         <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="Testimonials" />
          <TestimonialPage/>
          <Footer />
     </Fragment>
