@@ -3,7 +3,6 @@ import { Head, Link, router, useForm } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { MdDelete, MdOutlineClose } from "react-icons/md";
-import { FaEdit, FaEye } from "react-icons/fa";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
@@ -11,8 +10,9 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import { IoEyeOutline, IoPencilOutline } from "react-icons/io5";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import TextArea from "@/Components/TextArea";
 
-export default function Index({ auth, role, editData, isEditMode }) {
+export default function Index({ auth, queries, editData, isEditMode }) {
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -24,7 +24,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route("roles.destroy", id), {
+                router.delete(route("queries.destroy", id), {
                     onSuccess: () =>
                         Swal.fire(
                             "Deleted!",
@@ -55,6 +55,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
     } = useForm({
         id: "",
         name: "",
+        email: "",
+        phone: "",
+        message: "",
     });
 
     useEffect(() => {
@@ -62,6 +65,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
             setData({
                 id: editData?.id || "",
                 name: editData?.name || "",
+                email: editData?.email || "",
+                phone: editData?.phone || "",
+                message: editData?.message || "",
             });
         } else {
             reset(); // for add new
@@ -70,7 +76,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
 
     const handleEditClick = (item) => {
         setEditClick(true);
-        router.visit(route("roles.index", { id: item.id }), {
+        router.visit(route("queries.index", { id: item.id }), {
             preserveState: true,
             only: ["editData", "isEditMode"],
         });
@@ -80,29 +86,29 @@ export default function Index({ auth, role, editData, isEditMode }) {
     const Datasubmit = (e) => {
         e.preventDefault();
         editData
-            ? patch(route("roles.update", editData?.id), {
-                  onSuccess: () => {
-                      reset();
-                      setSidebarState(false);
-                  },
-              })
-            : post(route("roles.store"), {
-                  onSuccess: () => {
-                      reset();
-                      setSidebarState(false);
-                  },
-              });
+            ? patch(route("queries.update", editData?.id), {
+                onSuccess: () => {
+                    reset();
+                    setSidebarState(false);
+                },
+            })
+            : post(route("queries.store"), {
+                onSuccess: () => {
+                    reset();
+                    setSidebarState(false);
+                },
+            });
     };
 
     const [sidebarState, setSidebarState] = useState(false);
     return (
         <AuthenticatedLayout auth={auth}>
-            <Head title="Roles" />
+            <Head title="Queries" />
             <div className="bg-white p-[20px] rounded">
                 <div className="flex font-semibold items-center leading-tight text-primary justify-between mb-4">
-                    <h2 className="text-[18px] text-[#000]">All Roles</h2>
+                    <h2 className="text-[18px] text-[#000]">All Queries</h2>
                     <div className="text-primary dark:text-secondary md:text-sm text-xs">
-                        Per page {role.total}/{role.to || role.length}
+                        Per page {queries.total}/{queries.to || queries.length}
                         <label
                             onClick={(e) => {
                                 setEditClick(false);
@@ -110,7 +116,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             }}
                             className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
-                            Add Role
+                            Add Query
                         </label>
                     </div>
                 </div>
@@ -120,11 +126,14 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             <tr className="border-none">
                                 <th className="py-3 font-medium">#</th>
                                 <th className="py-3 font-medium">Name</th>
+                                <th className="py-3 font-medium">Email</th>
+                                <th className="py-3 font-medium">Phone</th>
+                                <th className="py-3 font-medium">Message</th>
                                 <th className="py-3 font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {role.data.map((item, index) => (
+                            {queries.data.map((item, index) => (
                                 <tr
                                     className="space-y-3 font-medium border-y border-[#E8E8E8] text-center"
                                     key={item.id}
@@ -134,6 +143,15 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         {item.name}
+                                    </td>
+                                    <td className="text-sm py-4 font-normal">
+                                        {item.email}
+                                    </td>
+                                    <td className="text-sm py-4 font-normal">
+                                        {item.phone}
+                                    </td>
+                                    <td className="text-sm py-4 font-normal">
+                                        {item.message}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         <div className="flex gap-2 justify-center">
@@ -148,7 +166,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                             </label>
                                             <Link
                                                 href={route(
-                                                    "roles.show",
+                                                    "queries.show",
                                                     item.id
                                                 )}
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
@@ -170,24 +188,22 @@ export default function Index({ auth, role, editData, isEditMode }) {
                         </tbody>
                     </table>
                 </div>
-                {role && role.last_page > 1 && (
+                {queries && queries.last_page > 1 && (
                     <div className="join flex justify-center mt-6 w-full">
                         <Link
-                            href={role.prev_page_url || "#"}
-                            className={`join-item btn ${
-                                role.prev_page_url ? "" : "btn-disabled"
-                            }`}
+                            href={queries.prev_page_url || "#"}
+                            className={`join-item btn ${queries.prev_page_url ? "" : "btn-disabled"
+                                }`}
                         >
                             «
                         </Link>
                         <button className="join-item btn cursor-default bg-primary text-white">
-                            Page {role.current_page}
+                            Page {queries.current_page}
                         </button>
                         <Link
-                            href={role.next_page_url || "#"}
-                            className={`join-item btn ${
-                                role.next_page_url ? "" : "btn-disabled"
-                            }`}
+                            href={queries.next_page_url || "#"}
+                            className={`join-item btn ${queries.next_page_url ? "" : "btn-disabled"
+                                }`}
                         >
                             »
                         </Link>
@@ -196,17 +212,15 @@ export default function Index({ auth, role, editData, isEditMode }) {
             </div>
 
             <div
-                className={`${
-                    sidebarState === true
-                        ? "visible opacity-1"
-                        : "hidden opacity-0"
-                } z-[50] fixed left-0 top-0 w-[100%] transition-all duration-500 ease overlay-box h-full bg-[#0000006b]`}
+                className={`${sidebarState === true
+                    ? "visible opacity-1"
+                    : "hidden opacity-0"
+                    } z-[50] fixed left-0 top-0 w-[100%] transition-all duration-500 ease overlay-box h-full bg-[#0000006b]`}
             ></div>
             <div
                 onClick={(e) => setSidebarState(false)}
-                className={`${
-                    sidebarState === true ? "right-0" : "-right-full"
-                } fixed top-0 w-[100%] transition-all duration-500 ease z-50 h-full overflow-y-auto`}
+                className={`${sidebarState === true ? "right-0" : "-right-full"
+                    } fixed top-0 w-[100%] transition-all duration-500 ease z-50 h-full overflow-y-auto`}
             >
                 <div
                     onClick={(e) => e.stopPropagation()}
@@ -215,7 +229,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                     <ul className="bg-white min-h-full p-0 dark:bg-primary">
                         <div className="flex justify-between border-b px-[15px] py-[10px]">
                             <h2 className="text-[18px] text-[#000]">
-                                {editClick === true ? "Edit" : "Add New"} Role
+                                {editClick === true ? "Edit" : "Add New"} Query
                             </h2>
                             <label
                                 onClick={(e) => setSidebarState(false)}
@@ -231,9 +245,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="name"
-                                    value={`Name${
-                                        editClick === true ? "" : "*"
-                                    }`}
+                                    value="Name"
                                 />
                                 <TextInput
                                     id="name"
@@ -243,10 +255,60 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         setData("name", e.target.value)
                                     }
                                     required
-                                    disabled={editClick === true}
                                     className="mt-1 block w-full"
                                 />
                                 <InputError message={errors.name} />
+                            </div>
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="email"
+                                    value="Email"
+                                />
+                                <TextInput
+                                    id="email"
+                                    type="email"
+                                    value={data.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.email} />
+                            </div>
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="phone"
+                                    value="Phone"
+                                />
+                                <TextInput
+                                    id="phone"
+                                    type="number"
+                                    value={data.phone}
+                                    onChange={(e) =>
+                                        setData("phone", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.phone} />
+                            </div>
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="message"
+                                    value="Message*"
+                                />
+                                <TextArea
+                                    id="message"
+                                    type="text"
+                                    value={data.message}
+                                    onChange={(e) =>
+                                        setData("message", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.message} />
                             </div>
                             <div className="flex items-center gap-4">
                                 {progress && (
@@ -257,11 +319,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         {progress.percentage}%
                                     </progress>
                                 )}
-                                {!editClick === true && (
-                                    <PrimaryButton disabled={progress}>
-                                        Save
-                                    </PrimaryButton>
-                                )}
+                                <PrimaryButton disabled={progress}>
+                                    Save
+                                </PrimaryButton>
 
                                 <Transition
                                     show={recentlySuccessful}

@@ -1,7 +1,42 @@
-import React, { Fragment } from "react";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextArea from "@/Components/TextArea";
+import TextInput from "@/Components/TextInput";
+import { Transition } from "@headlessui/react";
+import { useForm, usePage } from "@inertiajs/react";
+import React, { Fragment, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 export default function WhyChoose() {
+    const { data, setData, post, progress, recentlySuccessful, errors, reset } =
+        useForm({
+            id: "",
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+        });
+    const Datasubmit = (e) => {
+        e.preventDefault();
+        post(route("queries.add"), {
+            onSuccess: () => {
+                reset();
+                setSidebarState(false);
+            },
+        });
+    };
+    const { flash } = usePage().props;
+    useEffect(() => {
+        if (flash && flash.message) {
+            toast.success(flash.message);
+        }
+        if (flash && flash.error) {
+            toast.error(flash.error);
+        }
+    }, [flash]);
     return (
         <Fragment>
+            <ToastContainer />
             <section className="py-[80px] 2xl:py-[100px] work bg-custbg">
                 <div className="container mx-auto 2xl:px-[50px] px-[40px]">
                     <div className="grid items-center grid-cols-2 gap-x-[100px]">
@@ -68,34 +103,92 @@ export default function WhyChoose() {
                             <h5 className="mb-6 text-4xl font-semibold capitalize text-c4">
                                 Get In touch
                             </h5>
-                            <form>
-                                <input
-                                    type="text"
-                                    placeholder="Your Name"
-                                    className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
-                                />
-                                <input
-                                    type="email"
-                                    placeholder="Your E.mail"
-                                    className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
-                                />
-                                <input
-                                    type="number"
-                                    placeholder="123-456-7890"
-                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    className="w-full px-8 mb-3 font-medium text-black border-0 outline-none xl:py-6 lg:py-4 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
-                                />
-                                <textarea
-                                    name=""
-                                    id=""
-                                    placeholder="Your Message"
-                                    className="w-full px-8 py-4 mb-3 font-medium border-0 outline-none resize-none h-44 placeholder:text-lg placeholder:font-medium focus:outline-1 focus:ring-2 focus:ring-black"
-                                ></textarea>
-                                <input
-                                    className="text-xl font-medium transition-all duration-700 ease-in border-2 rounded-md cursor-pointer lg:mt-5 xl:mt-8 lg:px-12 xl:px-16 lg:py-2 xl:py-4 border-c2 bg-c2 hover:bg-c1 hover:text-white"
-                                    value="Send Message"
-                                    type="submit"
-                                />
+                            <form
+                                onSubmit={Datasubmit}
+                                className="grid grid-cols-12 items-center gap-5 px-[15px] py-[20px]"
+                            >
+                                <div className="col-span-12">
+                                    <InputLabel htmlFor="name" value="Name" />
+                                    <TextInput
+                                        id="name"
+                                        type="text"
+                                        value={data.name}
+                                        onChange={(e) =>
+                                            setData("name", e.target.value)
+                                        }
+                                        required
+                                        className="mt-1 block w-full"
+                                    />
+                                    <InputError message={errors.name} />
+                                </div>
+                                <div className="col-span-12">
+                                    <InputLabel htmlFor="email" value="Email" />
+                                    <TextInput
+                                        id="email"
+                                        type="email"
+                                        value={data.email}
+                                        onChange={(e) =>
+                                            setData("email", e.target.value)
+                                        }
+                                        required
+                                        className="mt-1 block w-full"
+                                    />
+                                    <InputError message={errors.email} />
+                                </div>
+                                <div className="col-span-12">
+                                    <InputLabel htmlFor="phone" value="Phone" />
+                                    <TextInput
+                                        id="phone"
+                                        type="number"
+                                        value={data.phone}
+                                        onChange={(e) =>
+                                            setData("phone", e.target.value)
+                                        }
+                                        required
+                                        className="mt-1 block w-full"
+                                    />
+                                    <InputError message={errors.phone} />
+                                </div>
+                                <div className="col-span-12">
+                                    <InputLabel
+                                        htmlFor="message"
+                                        value="Message*"
+                                    />
+                                    <TextArea
+                                        id="message"
+                                        type="text"
+                                        value={data.message}
+                                        onChange={(e) =>
+                                            setData("message", e.target.value)
+                                        }
+                                        required
+                                        className="mt-1 block w-full"
+                                    />
+                                    <InputError message={errors.message} />
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    {progress && (
+                                        <progress
+                                            value={progress.percentage}
+                                            max="100"
+                                        >
+                                            {progress.percentage}%
+                                        </progress>
+                                    )}
+                                    <button type="submit" className="inline-flex items-center px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500">Save</button>
+
+                                    <Transition
+                                        show={recentlySuccessful}
+                                        enter="transition ease-in-out"
+                                        enterFrom="opacity-0"
+                                        leave="transition ease-in-out"
+                                        leaveTo="opacity-0"
+                                    >
+                                        <p className="text-sm text-gray-600">
+                                            Add Brand
+                                        </p>
+                                    </Transition>
+                                </div>
                             </form>
                         </div>
                     </div>

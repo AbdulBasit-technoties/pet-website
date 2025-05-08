@@ -7,6 +7,7 @@ return [
         'users',
         'services',
         'testimonials',
-        'countries'
+        'countries',
+        'queries'
     ],
 ];

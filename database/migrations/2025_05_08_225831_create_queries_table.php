@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
+        Schema::create('queries', function (Blueprint $table) {
             $table->id();
-            $table->text('comment'); // For long comments
             $table->string('name');
-            $table->unsignedBigInteger('country_id'); // Foreign key column
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->string('image')->nullable(); // Optional image
-            $table->enum('rating', [1, 2, 3, 4, 5])->nullable(); // Optional rating
+            $table->string('email');
+            $table->string('phone');
+            $table->longText('message');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonials');
+        Schema::dropIfExists('queries');
     }
 };

@@ -13,7 +13,7 @@ class UpdateServicesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user()->can('services.update');
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ];
     }
 }

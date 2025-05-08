@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Services;
 use App\Http\Requests\StoreServicesRequest;
+use App\Http\Requests\UpdateServicesRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 class ServicesController extends Controller
 {
-    public function FrontIndex() {
-        return Inertia::render('Frontend/Services');
+    public function FrontIndex()
+    {
+        $services = Services::latest()->take(5)->get();
+        return Inertia::render('Frontend/Services', [
+            'services' => $services,
+        ]);
     }
 
-    public function Index(Request $request) {
+
+    public function Index(Request $request)
+    {
         if (!auth()->user()->can('services.index')) {
             abort(401);
         }
@@ -21,8 +29,9 @@ class ServicesController extends Controller
         $isEditMode = (bool)$request->id;
         return Inertia::render('Services/Index', compact('services', 'editData', 'isEditMode'));
     }
-    
-    public function Store(StoreServicesRequest $request) {
+
+    public function Store(StoreServicesRequest $request)
+    {
         if (!auth()->user()->can('services.index')) {
             abort(401);
         }
@@ -36,13 +45,24 @@ class ServicesController extends Controller
             'message' => 'Service created successfully!'
         ]);
     }
-    public function ServiceImage(Request $request) {
+    public function Update(UpdateServicesRequest $request, Services $service)
+    {
+        if (!auth()->user()->can('services.update')) {
+            abort(401);
+        }
+        $service->update($request->all());
+        return redirect()->route('services.index')->with([
+            'message' => 'Service updated successfully!'
+        ]);
+    }
+    public function ServiceImage(Request $request)
+    {
         $service = Services::find($request->id);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('Services', 'public');
             $service->update(['image' => $path]);
         }
-    
+
         return redirect()->back()->with('success', 'Image updated successfully!');
     }
     public function destroy($id)

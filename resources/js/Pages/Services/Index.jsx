@@ -356,9 +356,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="title"
-                                    value={`Title${
-                                        editClick === true ? "" : "*"
-                                    }`}
+                                    value="Title*"
                                 />
                                 <TextInput
                                     id="title"
@@ -376,9 +374,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                 <div className="col-span-12">
                                     <InputLabel
                                         htmlFor="image"
-                                        value={`Image${
-                                            editClick === true ? "" : "*"
-                                        }`}
+                                        value="Image*"
                                     />
                                     <TextInput
                                         id="image"
@@ -388,7 +384,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                             setData("image", e.target.files[0])
                                         }
                                         required
-                                        disabled={editClick === true}
                                         className="mt-1 block w-full"
                                     />
                                     <InputError message={errors.image} />
@@ -397,9 +392,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="description"
-                                    value={`Description${
-                                        editClick === true ? "" : "*"
-                                    }`}
+                                    value="Description*"
                                 />
                                 <TextArea
                                     id="description"
@@ -409,7 +402,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                         setData("description", e.target.value)
                                     }
                                     required
-                                    disabled={editClick === true}
                                     className="mt-1 block w-full"
                                 />
                                 <InputError message={errors.description} />

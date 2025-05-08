@@ -197,6 +197,25 @@ export default function Authenticated({ auth, header, children }) {
                                         </SidebarLink>
                                     </li>
                                 )}
+                                {can("queries.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("queries.index")}
+                                            active={route().current("queries.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("queries.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Queries
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
 
                             </ul>
                         </div>

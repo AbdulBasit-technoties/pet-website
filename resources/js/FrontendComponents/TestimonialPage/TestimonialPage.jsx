@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { FaRegStar } from 'react-icons/fa6'
 
-export default function TestimonialPage() {
+export default function TestimonialPage({testimonials}) {
     return (
         <Fragment>
             <section className="testimonial relative py-[80px] 2xl:py-[100px]">

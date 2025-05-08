@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTestimonialsRequest;
+use App\Http\Requests\UpdateTestimonialsRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Testimonial;
@@ -10,7 +11,10 @@ use App\Models\Country;
 class TestimonialController extends Controller
 {
     public function FrontIndex() {
-        return Inertia::render('Frontend/Testimonials');
+        $testimonials = Testimonial::latest()->take(5)->get();
+        return Inertia::render('Frontend/Testimonials',[
+            'testimonials' => $testimonials,
+        ]);
     }
     public function Index(Request $request) {
         if (!auth()->user()->can('testimonials.index')) {
@@ -50,14 +54,22 @@ class TestimonialController extends Controller
         ]);
 
     }
+    public function Update(UpdateTestimonialsRequest $request, Testimonial $testimonial) {
+        if (!auth()->user()->can('testimonials.update')) {
+            abort(401); 
+        }   
+        $testimonial->update($request->all());
+        return redirect()->route('testimonials.index')->with([
+           'message' => 'Testimonial updated successfully!'
+        ]);
+    }
 
-    public function destroy($id)
+    public function destroy(Testimonial $testimonial)
     {
         if (!auth()->user()->can('testimonials.destroy')) {
             abort(401);
         }
-        $testi = Testimonial::findOrFail($id);
-        $testi->delete();
+        $testimonial->delete();
         return redirect()->route('testimonials.index')->with([
             'message' => 'Testimonial deleted successfully!'
         ]);

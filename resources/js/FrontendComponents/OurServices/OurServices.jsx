@@ -1,28 +1,6 @@
 import React, { Fragment } from 'react'
 
-export default function OurServices() {
-  const card = [
-    {
-      image: "/FrontendImages/Vector_compressed.webp",
-      title: "International Pet Shipping",
-    },
-    {
-      image: "/FrontendImages/Group 199_compressed.webp",
-      title: "VIP Handling for Pets",
-    },
-    {
-      image: "/FrontendImages/Group_compressed.webp",
-      title: "Door-to-Door Pet Transport Services",
-    },
-    {
-      image: "/FrontendImages/Group 198_compressed.webp",
-      title: "Climate Cont-rolled Travel Environments",
-    },
-    {
-      image: "/FrontendImages/Group 197_compressed.webp",
-      title: "24/7 Customer Support for Pet Owners",
-    }
-  ];
+export default function OurServices({services}) {
   return (
     <Fragment>
       <section id="service" className='py-[50px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]'>
@@ -33,12 +11,14 @@ export default function OurServices() {
             </h2>
           </div>
           <div className="grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-1 lg:gap-y-0 sm:gap-y-[24px] gap-y-[20px]">
-            {card.map((item, index) => {
+            {services.map((item, index) => {
               return (
                 <div className="service-main text-center" key={index}>
                   <div className="bg-c1 flex mx-auto justify-center w-max p-4 rounded before:rounded before:top-0 before:left-0 relative before:absolute before:w-full before:h-full before:bg-c2 before:-rotate-12 before:-z-10">
                     <img
-                      src={item.image}
+                      src={item.image
+                        ? `${window.location.origin}/storage/${item.image}`
+                        : "/images/no-image.webp"}
                       alt="Service"
                       className="w-[40px] h-[40px] xl:w-[50px] xl:h-[50px] object-contain"
                     />

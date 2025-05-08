@@ -29,7 +29,7 @@ class RoleController extends Controller
         $permissions = $role->permissions->pluck('name')->toArray();
         $permissionsList = Permission::pluck('name')->toArray();
         $models = config('models.models');
-        return Inertia::render('Roles/Show', compact('role', 'permissions','permissionsList','models'));
+        return Inertia::render('Roles/Show', compact('role', 'permissions', 'permissionsList', 'models'));
     }
     public function index(Request $request)
     {
@@ -39,56 +39,53 @@ class RoleController extends Controller
         $role = Role::paginate(30);
         $editData = $request->id ? Role::find($request->id) : null;
         $isEditMode = (bool)$request->id;
-        return Inertia::render('Roles/Index', compact('role','editData','isEditMode'));
+        return Inertia::render('Roles/Index', compact('role', 'editData', 'isEditMode'));
     }
 
     public function create(Request $request)
-{
-    if (!auth()->user()->can('roles.create')) {
-        abort(401);
+    {
+        if (!auth()->user()->can('roles.create')) {
+            abort(401);
+        }
+
+        return Inertia::render('Roles/Create');
     }
 
-    return Inertia::render('Roles/Create');
 
-}
-
-
-public function store(Request $request)
-{
-    if (!auth()->user()->can('roles.store')) {
-        abort(401);
+    public function store(Request $request)
+    {
+        if (!auth()->user()->can('roles.store')) {
+            abort(401);
+        }
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        if (Role::where('name', $request->name)->exists()) {
+            session()->flash('message', 'Role already exists');
+            return redirect()->back();
+        }
+        Role::create([
+            'name' => $request->name,
+        ]);
+        return redirect()->route('roles.index')->with([
+            'message' => 'Role created successfully!'
+        ]);
     }
-    $request->validate([
-        'name' => 'required|string|max:255',
-    ]);
-    if (Role::where('name', $request->name)->exists()) {
-        session()->flash('message', 'Role already exists'); 
-        return redirect()->back();    
+
+    public function Edit($id)
+    {
+        $role = Role::findOrFail($id);
+        return Inertia::render('Roles/Edit', compact('role'));
     }
-    Role::create([
-        'name' => $request->name,
-    ]);
-    return redirect()->route('roles.index')->with([
-        'message' => 'Role created successfully!'
-    ]);
-
-}
-
-public function Edit($id)
-{
-    $role = Role::findOrFail($id);
-    return Inertia::render('Roles/Edit', compact('role'));
-
-}
-public function destroy($id)
-{
-    if (!auth()->user()->can('roles.destroy')) {
-        abort(401);
+    public function destroy($id)
+    {
+        if (!auth()->user()->can('roles.destroy')) {
+            abort(401);
+        }
+        $role = Role::findOrFail($id);
+        $role->delete();
+        return redirect()->route('roles.index')->with([
+            'message' => 'Role deleted successfully!'
+        ]);
     }
-    $role = Role::findOrFail($id);
-    $role->delete();
-    return redirect()->route('roles.index')->with([
-        'message' => 'Role deleted successfully!'
-    ]);
-}
 }
