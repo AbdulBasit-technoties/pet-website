@@ -9,7 +9,7 @@ export default function WhyChoose() {
                             <h6 className="mb-4 text-[20px] 2xl:text-[24px] font-medium text-c1">
                                 How it work?
                             </h6>
-                            <h2 className="text-[#404040] capitalize text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px] font-semibold">
+                            <h2 className="text-[#404040] capitalize text-[24px] sm:text-[28px] lg:text-[34px] 2xl:text-[40px] 2xl:mb-[70px] lg:mb-[50px] md:mb-[40px] mb-[30px] font-semibold">
                                 the amazing steps of our Services
                             </h2>
                             <div className="flex gap-10 item-center mb-[70px]">
