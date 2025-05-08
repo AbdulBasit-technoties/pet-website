@@ -16,7 +16,7 @@ export default function PetFriendly() {
                     <div className="grid grid-cols-12 place-items-center">
                         <div className="col-span-12 lg:col-span-5">
                             <div className="fre-con-main 2xl:pe-[50px] text-center lg:text-left">
-                                <p className="text-[18px] xl:text-[20px] 2xl:text-[22px] text-c3 mb-[30px] xl:mb-[40px]">
+                                <p className="sm:text-[18px] xl:text-[20px] 2xl:text-[22px] text-c3 sm:mb-[30px] mb-[20px] xl:mb-[40px]">
                                     Finding a new home for your pets is as
                                     important as finding one for yourself.
                                     PetPaws Cargo assists in locating
