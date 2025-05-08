@@ -11,8 +11,9 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import { IoEyeOutline, IoPencilOutline } from "react-icons/io5";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import TextArea from "@/Components/TextArea";
 
-export default function Index({ auth, role, editData, isEditMode }) {
+export default function Index({ auth, countries, editData, isEditMode }) {
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -24,7 +25,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route("roles.destroy", id), {
+                router.delete(route("countries.destroy", id), {
                     onSuccess: () =>
                         Swal.fire(
                             "Deleted!",
@@ -55,6 +56,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
     } = useForm({
         id: "",
         name: "",
+        code: "",
     });
 
     useEffect(() => {
@@ -62,6 +64,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
             setData({
                 id: editData?.id || "",
                 name: editData?.name || "",
+                code: editData?.code || "",
             });
         } else {
             reset(); // for add new
@@ -70,7 +73,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
 
     const handleEditClick = (item) => {
         setEditClick(true);
-        router.visit(route("roles.index", { id: item.id }), {
+        router.visit(route("countries.index", { id: item.id }), {
             preserveState: true,
             only: ["editData", "isEditMode"],
         });
@@ -80,30 +83,29 @@ export default function Index({ auth, role, editData, isEditMode }) {
     const Datasubmit = (e) => {
         e.preventDefault();
         editData
-            ? patch(route("roles.update", editData?.id), {
-                  onSuccess: () => {
-                      reset();
-                      setSidebarState(false);
-                  },
-              })
-            : post(route("roles.store"), {
-                  onSuccess: () => {
-                      reset();
-                      setSidebarState(false);
-                  },
-              });
+            ? patch(route("countries.update", editData?.id), {
+                onSuccess: () => {
+                    reset();
+                    setSidebarState(false);
+                },
+            })
+            : post(route("countries.store"), {
+                onSuccess: () => {
+                    reset();
+                    setSidebarState(false);
+                },
+            });
     };
 
     const [sidebarState, setSidebarState] = useState(false);
-    console.log(editData);
     return (
         <AuthenticatedLayout auth={auth}>
-            <Head title="Roles" />
+            <Head title="Countries" />
             <div className="bg-white p-[20px] rounded">
                 <div className="flex font-semibold items-center leading-tight text-primary justify-between mb-4">
-                    <h2 className="text-[18px] text-[#000]">All Roles</h2>
+                    <h2 className="text-[18px] text-[#000]">All Countries</h2>
                     <div className="text-primary dark:text-secondary md:text-sm text-xs">
-                        Per page {role.total}/{role.to || role.length}
+                        Per page {countries.total}/{countries.to || countries.length}
                         <label
                             onClick={(e) => {
                                 setEditClick(false);
@@ -111,7 +113,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             }}
                             className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
-                            Add Role
+                            Add Country
                         </label>
                     </div>
                 </div>
@@ -121,11 +123,12 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             <tr className="border-none">
                                 <th className="py-3 font-medium">#</th>
                                 <th className="py-3 font-medium">Name</th>
+                                <th className="py-3 font-medium">Code</th>
                                 <th className="py-3 font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {role.data.map((item, index) => (
+                            {countries.data.map((item, index) => (
                                 <tr
                                     className="space-y-3 font-medium border-y border-[#E8E8E8] text-center"
                                     key={item.id}
@@ -135,6 +138,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         {item.name}
+                                    </td>
+                                    <td className="text-sm py-4 font-normal">
+                                        {item.code}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         <div className="flex gap-2 justify-center">
@@ -149,7 +155,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                             </label>
                                             <Link
                                                 href={route(
-                                                    "roles.show",
+                                                    "countries.show",
                                                     item.id
                                                 )}
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
@@ -171,24 +177,22 @@ export default function Index({ auth, role, editData, isEditMode }) {
                         </tbody>
                     </table>
                 </div>
-                {role && role.last_page > 1 && (
+                {countries && countries.last_page > 1 && (
                     <div className="join flex justify-center mt-6 w-full">
                         <Link
-                            href={role.prev_page_url || "#"}
-                            className={`join-item btn ${
-                                role.prev_page_url ? "" : "btn-disabled"
-                            }`}
+                            href={countries.prev_page_url || "#"}
+                            className={`join-item btn ${countries.prev_page_url ? "" : "btn-disabled"
+                                }`}
                         >
                             «
                         </Link>
                         <button className="join-item btn cursor-default bg-primary text-white">
-                            Page {role.current_page}
+                            Page {countries.current_page}
                         </button>
                         <Link
-                            href={role.next_page_url || "#"}
-                            className={`join-item btn ${
-                                role.next_page_url ? "" : "btn-disabled"
-                            }`}
+                            href={countries.next_page_url || "#"}
+                            className={`join-item btn ${countries.next_page_url ? "" : "btn-disabled"
+                                }`}
                         >
                             »
                         </Link>
@@ -197,17 +201,15 @@ export default function Index({ auth, role, editData, isEditMode }) {
             </div>
 
             <div
-                className={`${
-                    sidebarState === true
-                        ? "visible opacity-1"
-                        : "hidden opacity-0"
-                } z-[50] fixed left-0 top-0 w-[100%] transition-all duration-500 ease overlay-box h-full bg-[#0000006b]`}
+                className={`${sidebarState === true
+                    ? "visible opacity-1"
+                    : "hidden opacity-0"
+                    } z-[50] fixed left-0 top-0 w-[100%] transition-all duration-500 ease overlay-box h-full bg-[#0000006b]`}
             ></div>
             <div
                 onClick={(e) => setSidebarState(false)}
-                className={`${
-                    sidebarState === true ? "right-0" : "-right-full"
-                } fixed top-0 w-[100%] transition-all duration-500 ease z-50 h-full overflow-y-auto`}
+                className={`${sidebarState === true ? "right-0" : "-right-full"
+                    } fixed top-0 w-[100%] transition-all duration-500 ease z-50 h-full overflow-y-auto`}
             >
                 <div
                     onClick={(e) => e.stopPropagation()}
@@ -216,7 +218,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                     <ul className="bg-white min-h-full p-0 dark:bg-primary">
                         <div className="flex justify-between border-b px-[15px] py-[10px]">
                             <h2 className="text-[18px] text-[#000]">
-                                {editClick === true ? "Edit" : "Add New"} Role
+                                {editClick === true ? "Edit" : "Add New"} Country
                             </h2>
                             <label
                                 onClick={(e) => setSidebarState(false)}
@@ -232,9 +234,8 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="name"
-                                    value={`Name${
-                                        editClick === true ? "" : "*"
-                                    }`}
+                                    value={`Name${editClick === true ? "" : "*"
+                                        }`}
                                 />
                                 <TextInput
                                     id="name"
@@ -244,10 +245,27 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         setData("name", e.target.value)
                                     }
                                     required
-                                    disabled={editClick === true}
                                     className="mt-1 block w-full"
                                 />
                                 <InputError message={errors.name} />
+                            </div>
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="code"
+                                    value={`Code${editClick === true ? "" : "*"
+                                        }`}
+                                />
+                                <TextInput
+                                    id="code"
+                                    type="text"
+                                    value={data.code}
+                                    onChange={(e) =>
+                                        setData("code", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.code} />
                             </div>
                             <div className="flex items-center gap-4">
                                 {progress && (
@@ -258,11 +276,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         {progress.percentage}%
                                     </progress>
                                 )}
-                                {!editClick === true && (
-                                    <PrimaryButton disabled={progress}>
-                                        Save
-                                    </PrimaryButton>
-                                )}
+                                <PrimaryButton disabled={progress}>
+                                    Save
+                                </PrimaryButton>
 
                                 <Transition
                                     show={recentlySuccessful}

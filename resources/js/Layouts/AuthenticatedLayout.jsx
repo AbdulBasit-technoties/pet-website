@@ -36,8 +36,8 @@ export default function Authenticated({ auth, header, children }) {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white fixed top-0 w-full left-0 z-50">
+        <div className="min-h-screen bg-[#f8f8fb]">
+            <nav className="bg-white w-full left-0 z-50">
                 <div className="px-[10px] lg:px-[20px] py-[10px]">
                     <div className="flex items-center justify-between flex-col lg:flex-row gap-y-4 sm:gap-y-0">
                         <div className="flex items-center lg:gap-[70px] w-full lg:w-auto justify-between lg:justify-auto">
@@ -60,7 +60,7 @@ export default function Authenticated({ auth, header, children }) {
                                 <div className="flex items-center">
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <button className="px-3 py-2 font-medium rounded-md bg-c1 text-white">
+                                            <button className="w-[40px] h-[40px] flex items-center justify-center border border-c1 hover:bg-transparent hover:text-c1 font-medium rounded bg-c1 text-white transition-all duration-500">
                                                 <IoSettings />
                                             </button>
                                         </Dropdown.Trigger>
@@ -88,70 +88,127 @@ export default function Authenticated({ auth, header, children }) {
                 </div>
             </nav>
 
-            <main className="grid grid-cols-12">
-            <ToastContainer />
-
-                {isDrawerOpen && (
-                    <div
-                        className={`${
-                            isDrawerOpen
-                                ? "fixed z-10 left-0 top-0 xl:w-full sm:w-1/2 w-[80%]"
+            <main>
+                <ToastContainer />
+                <div className="grid grid-cols-12 transition-all duration-500">
+                    {isDrawerOpen && (
+                        <div
+                            className={`${isDrawerOpen
+                                ? "fixed z-10 left-0 top-[82px] xl:w-full sm:w-1/2 w-[80%]"
                                 : ""
-                        } cust-navs-sidebar overflow-y-auto xl:col-span-2 xl:block bg-secondary dark:bg-primary h-screen p-4 pt-[130px] lg:pt-[110px] lg:pt-20 xl:sticky lg:top-0`}
-                    >
-                        <ul>
-                            <h6 className="text-custgray font-medium dark:text-secondary uppercase text-[13px] mb-3 mt-4">
-                                Data
-                            </h6>
-                            <li>
-                                <SidebarLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    <span
-                                        className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
-            ${
-                route().current("dashboard")
-                    ? "text-[#15ABA2]"
-                    : "dark:text-secondary text-primary group-hover:text-[#15ABA2]"
-            }`}
-                                    >
-                                        <FaTachometerAlt className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />{" "}
-                                        Dashboard
-                                    </span>
-                                </SidebarLink>
-                            </li>
-                            {can("roles.index") && (
+                                } cust-navs-sidebar overflow-y-auto xl:col-span-2 xl:block px-[20px] py-[20px] bg-white h-screen xl:sticky`}
+                        >
+                            <ul>
+                                <h6 className="uppercase text-[14px] text-c3 mb-[10px]">
+                                    Data
+                                </h6>
                                 <li>
                                     <SidebarLink
-                                        href={route("roles.index")}
-                                        active={route().current("roles.index")}
+                                        href={route("dashboard")}
+                                        active={route().current("dashboard")}
                                     >
                                         <span
                                             className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
-            ${
-                route().current("roles.index")
-                    ? "text-[#15ABA2]"
-                    : "dark:text-secondary text-primary group-hover:text-[#15ABA2]"
-            }`}
+            ${route().current("dashboard")
+                                                    ? "text-c1"
+                                                    : "dark:text-secondary text-primary group-hover:text-c1"
+                                                }`}
                                         >
-                                            <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />{" "}
-                                            Roles
+                                            <FaTachometerAlt className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />{" "}
+                                            Dashboard
                                         </span>
                                     </SidebarLink>
                                 </li>
-                            )}
-                        </ul>
-                    </div>
-                )}
-                <div
-                    className={`${
-                        isDrawerOpen
-                            ? "xl:col-span-10 col-span-12"
+                                {can("roles.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("roles.index")}
+                                            active={route().current("roles.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("roles.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Roles
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
+
+                                {can("services.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("services.index")}
+                                            active={route().current("services.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("services.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Services
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
+
+                                {can("testimonials.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("testimonials.index")}
+                                            active={route().current("testimonials.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("testimonials.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Testimonial
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
+                                {can("countries.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("countries.index")}
+                                            active={route().current("countries.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("countries.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Countries
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
+
+                            </ul>
+                        </div>
+                    )}
+                    <div
+                        className={`${isDrawerOpen
+                            ? "xl:col-span-10 col-span-12 "
                             : "col-span-12"
-                    } text-primary transition-all duration-500`}
-                >
-                    {children}
+                            } text-primary transition-all duration-500 pt-10 px-10`}
+                    >
+                        {children}
+                    </div>
                 </div>
             </main>
         </div>

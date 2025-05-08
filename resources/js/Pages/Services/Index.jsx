@@ -11,8 +11,10 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import { IoEyeOutline, IoPencilOutline } from "react-icons/io5";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import TextArea from "@/Components/TextArea";
+import Modal from "@/Components/Modal";
 
-export default function Index({ auth, role, editData, isEditMode }) {
+export default function Index({ auth, services, editData, isEditMode }) {
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -24,7 +26,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route("roles.destroy", id), {
+                router.delete(route("services.destroy", id), {
                     onSuccess: () =>
                         Swal.fire(
                             "Deleted!",
@@ -54,14 +56,18 @@ export default function Index({ auth, role, editData, isEditMode }) {
         reset,
     } = useForm({
         id: "",
-        name: "",
+        title: "",
+        image: "",
+        description: "",
     });
 
     useEffect(() => {
         if (editClick) {
             setData({
                 id: editData?.id || "",
-                name: editData?.name || "",
+                title: editData?.title || "",
+                image: editData?.image || "",
+                description: editData?.description || "",
             });
         } else {
             reset(); // for add new
@@ -70,7 +76,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
 
     const handleEditClick = (item) => {
         setEditClick(true);
-        router.visit(route("roles.index", { id: item.id }), {
+        router.visit(route("services.index", { id: item.id }), {
             preserveState: true,
             only: ["editData", "isEditMode"],
         });
@@ -80,13 +86,13 @@ export default function Index({ auth, role, editData, isEditMode }) {
     const Datasubmit = (e) => {
         e.preventDefault();
         editData
-            ? patch(route("roles.update", editData?.id), {
+            ? patch(route("services.update", editData?.id), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
                   },
               })
-            : post(route("roles.store"), {
+            : post(route("services.store"), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
@@ -95,15 +101,26 @@ export default function Index({ auth, role, editData, isEditMode }) {
     };
 
     const [sidebarState, setSidebarState] = useState(false);
-    console.log(editData);
+    const [modalData, setModalData] = useState(null);
+    const [isItem, setIsItem] = useState(null);
+    const handleModalClick = (item) => {
+        setModalData(true);
+        setIsItem(item);
+    };
+
+    const closeModals = () => {
+        setModalData(null);
+    };
+
     return (
         <AuthenticatedLayout auth={auth}>
-            <Head title="Roles" />
+            <Head title="Services" />
             <div className="bg-white p-[20px] rounded">
                 <div className="flex font-semibold items-center leading-tight text-primary justify-between mb-4">
-                    <h2 className="text-[18px] text-[#000]">All Roles</h2>
+                    <h2 className="text-[18px] text-[#000]">All Services</h2>
                     <div className="text-primary dark:text-secondary md:text-sm text-xs">
-                        Per page {role.total}/{role.to || role.length}
+                        Per page {services.total}/
+                        {services.to || services.length}
                         <label
                             onClick={(e) => {
                                 setEditClick(false);
@@ -111,7 +128,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                             }}
                             className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
-                            Add Role
+                            Add Service
                         </label>
                     </div>
                 </div>
@@ -120,12 +137,16 @@ export default function Index({ auth, role, editData, isEditMode }) {
                         <thead className="bg-[#f8f8fb] border-t border-b border-[#E8E8E8]">
                             <tr className="border-none">
                                 <th className="py-3 font-medium">#</th>
-                                <th className="py-3 font-medium">Name</th>
+                                <th className="py-3 font-medium">Title</th>
+                                <th className="py-3 font-medium">Image</th>
+                                <th className="py-3 font-medium">
+                                    Description
+                                </th>
                                 <th className="py-3 font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {role.data.map((item, index) => (
+                            {services.data.map((item, index) => (
                                 <tr
                                     className="space-y-3 font-medium border-y border-[#E8E8E8] text-center"
                                     key={item.id}
@@ -134,7 +155,25 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         {index + 1}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
-                                        {item.name}
+                                        {item.title}
+                                    </td>
+                                    <td className="text-sm py-4 font-normal">
+                                        <img
+                                            src={
+                                                item.image
+                                                    ? `${window.location.origin}/storage/${item.image}`
+                                                    : "/images/no-image.webp"
+                                            }
+                                            alt={item.title}
+                                            className="w-10 h-10 object-cover mx-auto cursor-pointer"
+                                            onClick={() =>
+                                                handleModalClick(item)
+                                            }
+                                        />
+                                    </td>
+
+                                    <td className="text-sm py-4 font-normal">
+                                        {item.description}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         <div className="flex gap-2 justify-center">
@@ -149,7 +188,7 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                             </label>
                                             <Link
                                                 href={route(
-                                                    "roles.show",
+                                                    "services.show",
                                                     item.id
                                                 )}
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
@@ -171,29 +210,113 @@ export default function Index({ auth, role, editData, isEditMode }) {
                         </tbody>
                     </table>
                 </div>
-                {role && role.last_page > 1 && (
+                {services && services.last_page > 1 && (
                     <div className="join flex justify-center mt-6 w-full">
                         <Link
-                            href={role.prev_page_url || "#"}
+                            href={services.prev_page_url || "#"}
                             className={`join-item btn ${
-                                role.prev_page_url ? "" : "btn-disabled"
+                                services.prev_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             «
                         </Link>
                         <button className="join-item btn cursor-default bg-primary text-white">
-                            Page {role.current_page}
+                            Page {services.current_page}
                         </button>
                         <Link
-                            href={role.next_page_url || "#"}
+                            href={services.next_page_url || "#"}
                             className={`join-item btn ${
-                                role.next_page_url ? "" : "btn-disabled"
+                                services.next_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             »
                         </Link>
                     </div>
                 )}
+
+                <Modal
+                    show={modalData}
+                    onClose={closeModals}
+                    Title="Change Image"
+                >
+                    <form>
+                        <p className="block font-medium text-[15px] text-primary dark:text-secondary mb-[20px]">
+                            Image Change Here
+                        </p>
+                        <div className="">
+                            <InputLabel
+                                htmlFor="image"
+                                value="Image Attached"
+                            />
+                            <TextInput
+                                id="image"
+                                className="mt-1 block w-full"
+                                isFocused
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        const formData = new FormData();
+                                        formData.append("image", file);
+                                        formData.append("id", isItem.id); // Beneficiary ka ID bhejna zaroori hai
+
+                                        router.post(
+                                            route("services.image"),
+                                            formData,
+                                            {
+                                                forceFormData: true,
+                                                onSuccess: () => {
+                                                    console.log(
+                                                        "Image updated successfully!"
+                                                    );
+                                                    setModalData(null)
+                                                },
+                                                onError: (errors) => {
+                                                    console.error(
+                                                        "Error uploading image:",
+                                                        errors
+                                                    );
+                                                },
+                                            }
+                                        );
+                                    }
+                                }}
+                                type="file"
+                            />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 2xl:gap-4 mb-[25px]">
+                            {isItem && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 2xl:gap-4 mb-[25px]">
+                                    <img
+                                        src={
+                                            isItem.image
+                                                ? `${window.location.origin}/storage/${isItem.image}`
+                                                : "/images/no-image.webp"
+                                        }
+                                        alt={isItem.title || "Image"}
+                                        className="w-full max-w-[200px] rounded"
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="text-black flex gap-y-4 justify-between">
+                            <button
+                                type="button"
+                                onClick={closeModals}
+                                className="inline-flex items-center px-4 py-2 font-medium bg-custgreen border border-transparent rounded text-[14px] text-white capitalize hover:border-custgreen hover:bg-transparent hover:text-custgreen transition-all duration-500"
+                            >
+                                Close
+                            </button>
+
+                            <button
+                                type="submit"
+                                className="inline-flex items-center px-4 py-2 font-medium bg-custgreen border border-transparent rounded text-[14px] text-white capitalize hover:border-custgreen hover:bg-transparent hover:text-custgreen transition-all duration-500"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </Modal>
             </div>
 
             <div
@@ -216,7 +339,8 @@ export default function Index({ auth, role, editData, isEditMode }) {
                     <ul className="bg-white min-h-full p-0 dark:bg-primary">
                         <div className="flex justify-between border-b px-[15px] py-[10px]">
                             <h2 className="text-[18px] text-[#000]">
-                                {editClick === true ? "Edit" : "Add New"} Role
+                                {editClick === true ? "Edit" : "Add New"}{" "}
+                                Service
                             </h2>
                             <label
                                 onClick={(e) => setSidebarState(false)}
@@ -231,23 +355,64 @@ export default function Index({ auth, role, editData, isEditMode }) {
                         >
                             <div className="col-span-12">
                                 <InputLabel
-                                    htmlFor="name"
-                                    value={`Name${
+                                    htmlFor="title"
+                                    value={`Title${
                                         editClick === true ? "" : "*"
                                     }`}
                                 />
                                 <TextInput
-                                    id="name"
+                                    id="title"
                                     type="text"
-                                    value={data.name}
+                                    value={data.title}
                                     onChange={(e) =>
-                                        setData("name", e.target.value)
+                                        setData("title", e.target.value)
+                                    }
+                                    required
+                                    className="mt-1 block w-full"
+                                />
+                                <InputError message={errors.title} />
+                            </div>
+                            {!editClick && (
+                                <div className="col-span-12">
+                                    <InputLabel
+                                        htmlFor="image"
+                                        value={`Image${
+                                            editClick === true ? "" : "*"
+                                        }`}
+                                    />
+                                    <TextInput
+                                        id="image"
+                                        type="file"
+                                        value={data.image}
+                                        onChange={(e) =>
+                                            setData("image", e.target.files[0])
+                                        }
+                                        required
+                                        disabled={editClick === true}
+                                        className="mt-1 block w-full"
+                                    />
+                                    <InputError message={errors.image} />
+                                </div>
+                            )}
+                            <div className="col-span-12">
+                                <InputLabel
+                                    htmlFor="description"
+                                    value={`Description${
+                                        editClick === true ? "" : "*"
+                                    }`}
+                                />
+                                <TextArea
+                                    id="description"
+                                    type="text"
+                                    value={data.description}
+                                    onChange={(e) =>
+                                        setData("description", e.target.value)
                                     }
                                     required
                                     disabled={editClick === true}
                                     className="mt-1 block w-full"
                                 />
-                                <InputError message={errors.name} />
+                                <InputError message={errors.description} />
                             </div>
                             <div className="flex items-center gap-4">
                                 {progress && (
@@ -258,11 +423,9 @@ export default function Index({ auth, role, editData, isEditMode }) {
                                         {progress.percentage}%
                                     </progress>
                                 )}
-                                {!editClick === true && (
-                                    <PrimaryButton disabled={progress}>
-                                        Save
-                                    </PrimaryButton>
-                                )}
+                                <PrimaryButton disabled={progress}>
+                                    Save
+                                </PrimaryButton>
 
                                 <Transition
                                     show={recentlySuccessful}

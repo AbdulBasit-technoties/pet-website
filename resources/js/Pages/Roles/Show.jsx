@@ -38,10 +38,10 @@ function View(props) {
                 }
             >
                 <Head title="Admin Dashboard" />
-                <div className="flex flex-col pt-32 px-10">
-                    <div className="col-span-4 bg-white dark:bg-primary dark:text-white p-4 text-primary rounded-2xl flex justify-between items-center">
+                <div className="flex flex-col">
+                    <div className="col-span-4 bg-white p-4 text-primary rounded flex justify-between items-center">
                         <div className="">
-                            <h3 className="text-lg font-medium">Manage Permissions for {role.name}</h3>
+                            <h2 className="text-[18px] text-[#000]">Manage Permissions for {role.name}</h2>
                             <label className="flex items-center mt-2 bg-white rounded-md py-2 pl-3">
                                 <input
                                     type="checkbox"
@@ -49,7 +49,7 @@ function View(props) {
                                     onChange={(e) => {
                                         setSelectedPermissions(e.target.checked ? permissionsList : []);
                                     }}
-                                    className='text-custgreen focus:ring-custgreen'
+                                    className='text-c1 focus:ring-c1'
                                 />
                                 <span className="ml-2 text-primary">Select All</span>
                             </label>
@@ -57,7 +57,7 @@ function View(props) {
 
                         <button
                             onClick={handleSave}
-                            className="inline-flex hover:bg-primary hover:text-white hover:border-white transition-all duration-500 items-center px-4 py-2 dark:bg-white dark:text-primary bg-primary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest"
+                            className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
                             Save
                         </button>
@@ -67,7 +67,7 @@ function View(props) {
                     <div className="py-6 gap-4 grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
 
                         {Object.entries(groupedPermissions).map(([item, actions]) => (
-                            <div key={item} className="bg-white dark:bg-primary dark:text-white text-primary p-6 rounded-2xl shadow-lg">
+                            <div key={item} className="bg-white dark:bg-primary text-primary p-6 rounded">
                                 <h4 className="font-semibold capitalize flex items-center gap-2 mb-2">
                                     <input
                                         type="checkbox"
@@ -84,7 +84,7 @@ function View(props) {
                                                     : [...prev, ...allPermissions]
                                             );
                                         }}
-                                        className='text-custgreen focus:ring-custgreen'
+                                        className='text-c1 focus:ring-c1'
                                     />
                                     {item}
                                 </h4>
@@ -95,7 +95,7 @@ function View(props) {
                                             type="checkbox"
                                             checked={selectedPermissions.includes(permission)}
                                             onChange={() => handleCheckboxChange(permission)}
-                                            className='text-custgreen focus:ring-custgreen'
+                                            className='text-c1 focus:ring-c1'
                                         />
                                         <span className="ml-2">{action} {item}</span>
                                     </label>

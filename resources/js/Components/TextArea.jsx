@@ -14,7 +14,7 @@ export default forwardRef(function TextareaInput({ type = 'text', className = ''
             rows="4"
             {...props}
             className={
-                'w-full border px-5 py-3 rounded focus:outline-none focus:border-c1 text-c3 !ring-0 ' +
+                'w-full border border-[#E8E8E8] px-5 py-3 rounded focus:outline-none focus:border-c1 text-[#000] !ring-0 ' +
                 className
             }
             ref={input}

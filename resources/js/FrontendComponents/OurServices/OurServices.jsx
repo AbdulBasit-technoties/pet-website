@@ -25,14 +25,14 @@ export default function OurServices() {
   ];
   return (
     <Fragment>
-      <section id="service" className='py-[80px] 2xl:py-[100px]'>
-        <div className="container mx-auto 2xl:px-[50px] px-[40px]">
+      <section id="service" className='py-[50px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]'>
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[40px] 2xl:px-[50px]">
           <div className="text-center">
-            <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[70px] mb-[50px] font-semibold font-semibold">
+            <h2 className="text-[#34495e] text-[24px] sm:text-[28px] lg:text-[34px] 2xl:text-[40px] 2xl:mb-[70px] lg:mb-[50px] md:mb-[40px] mb-[30px] font-semibold">
               Our Services
             </h2>
           </div>
-          <div className="grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-1 lg:gap-y-0 gap-y-10 ">
+          <div className="grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-1 lg:gap-y-0 sm:gap-y-[24px] gap-y-[20px]">
             {card.map((item, index) => {
               return (
                 <div className="service-main text-center" key={index}>
@@ -40,10 +40,10 @@ export default function OurServices() {
                     <img
                       src={item.image}
                       alt="Service"
-                      className="w-16 h-16 object-contain"
+                      className="w-[40px] h-[40px] xl:w-[50px] xl:h-[50px] object-contain"
                     />
                   </div>
-                  <h3 className="text-[18px] 2xl:text-xl font-medium text-c3 px-8 mt-5">{item.title}</h3>
+                  <h3 className="text-[16px] xl:text-[18px] 2xl:text-xl font-medium text-c3 sm:px-8 mt-5">{item.title}</h3>
                 </div>
               );
             })}

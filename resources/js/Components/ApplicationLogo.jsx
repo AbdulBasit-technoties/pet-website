@@ -1,5 +1,5 @@
 export default function ApplicationLogo(props) {
     return (
-        <img {...props} src="/FrontendImages/logo.png" alt="" className="w-28" />
+        <img {...props} src="/FrontendImages/dashlogo.png" alt="" className="w-[200px]" />
     );
 }

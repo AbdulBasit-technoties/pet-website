@@ -5,5 +5,8 @@ return [
         'roles',
         'profile',
         'users',
+        'services',
+        'testimonials',
+        'countries'
     ],
 ];

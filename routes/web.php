@@ -1,6 +1,8 @@
+
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
@@ -31,21 +33,28 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
-Route::resource('roles', RoleController::class);
-Route::resource('services', ServicesController::class,);
-Route::resource('about-us', AboutUsController::class,);
-Route::resource('contact-us', ContactUsController::class,);
-Route::resource('testimonials', TestimonialController::class,);
-Route::resource('galleries', GalleryController::class,);
-Route::resource('bookings', BookingController::class,);
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('services', ServicesController::class);
+    Route::post('services-image', [ServicesController::class, "ServiceImage"])->name('services.image');
+    Route::resource('testimonials', TestimonialController::class);
+    Route::post('testimonials-image', [TestimonialController::class, "TestimonialImage"])->name('testimonials.image');
+    Route::resource('countries', CountryController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('our-services', [ServicesController::class, "FrontIndex"])->name('services.front');
+Route::get('testimonials', [TestimonialController::class, "FrontIndex"])->name('testimonials.front');
+Route::resource('about-us', AboutUsController::class);
+Route::resource('contact-us', ContactUsController::class);
+Route::resource('galleries', GalleryController::class);
+Route::resource('bookings', BookingController::class);
+
 
 require __DIR__.'/auth.php';

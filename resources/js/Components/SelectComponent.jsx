@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 const customClassNames = {
     control: ({ isFocused }) =>
-      `w-full !border !border-c1 px-3 py-2 rounded focus:outline-none text-c3 !ring-0 text-black
+      `w-full !border !border-c1 px-3 py-2 !border-[#E8E8E8] rounded focus:outline-none text-c3 !ring-0 text-black
       ${isFocused ? '!border-c1' : '!border !border-gray-600 text-black'}
       !shadow-none focus:!ring-0 focus:!ring-transparent focus:!ring-offset-0 focus:!shadow-none text-black`,
 
