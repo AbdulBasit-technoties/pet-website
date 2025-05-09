@@ -216,6 +216,44 @@ export default function Authenticated({ auth, header, children }) {
                                         </SidebarLink>
                                     </li>
                                 )}
+                                {can("galleries.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("galleries.index")}
+                                            active={route().current("galleries.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("galleries.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Gallery
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
+                                {can("faqs.index") && (
+                                    <li>
+                                        <SidebarLink
+                                            href={route("faqs.index")}
+                                            active={route().current("faqs.index")}
+                                        >
+                                            <span
+                                                className={`flex items-center gap-1 text-[15px] sm:text-[16px] font-medium transition-all duration-500 mb-[10px]
+                ${route().current("faqs.index")
+                                                        ? "text-c1"
+                                                        : "dark:text-secondary text-primary group-hover:text-c1"
+                                                    }`}
+                                            >
+                                                <FaCriticalRole className="w-[26px] h-[26px] inline-block p-[5px] bg-custbg rounded me-[8px] dark:text-primary" />
+                                                Faqs
+                                            </span>
+                                        </SidebarLink>
+                                    </li>
+                                )}
 
                             </ul>
                         </div>

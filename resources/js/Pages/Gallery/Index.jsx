@@ -14,7 +14,7 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import TextArea from "@/Components/TextArea";
 import Modal from "@/Components/Modal";
 
-export default function Index({ auth, services, editData, isEditMode }) {
+export default function Index({ auth, galleries, editData, isEditMode }) {
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -26,7 +26,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route("services.destroy", id), {
+                router.delete(route("galleries.destroy", id), {
                     onSuccess: () =>
                         Swal.fire(
                             "Deleted!",
@@ -56,18 +56,14 @@ export default function Index({ auth, services, editData, isEditMode }) {
         reset,
     } = useForm({
         id: "",
-        title: "",
         image: "",
-        description: "",
     });
 
     useEffect(() => {
         if (editClick) {
             setData({
                 id: editData?.id || "",
-                title: editData?.title || "",
                 image: editData?.image || "",
-                description: editData?.description || "",
             });
         } else {
             reset(); // for add new
@@ -76,7 +72,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
 
     const handleEditClick = (item) => {
         setEditClick(true);
-        router.visit(route("services.index", { id: item.id }), {
+        router.visit(route("galleries.index", { id: item.id }), {
             preserveState: true,
             only: ["editData", "isEditMode"],
         });
@@ -86,13 +82,13 @@ export default function Index({ auth, services, editData, isEditMode }) {
     const Datasubmit = (e) => {
         e.preventDefault();
         editData
-            ? patch(route("services.update", editData?.id), {
+            ? patch(route("galleries.update", editData?.id), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
                   },
               })
-            : post(route("services.store"), {
+            : post(route("galleries.store"), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
@@ -114,13 +110,13 @@ export default function Index({ auth, services, editData, isEditMode }) {
 
     return (
         <AuthenticatedLayout auth={auth}>
-            <Head title="Services" />
+            <Head title="Gallery" />
             <div className="bg-white p-[20px] rounded">
                 <div className="flex font-semibold items-center leading-tight text-primary justify-between mb-4">
-                    <h2 className="text-[18px] text-[#000]">All Services</h2>
+                    <h2 className="text-[18px] text-[#000]">All Gallery</h2>
                     <div className="text-primary dark:text-secondary md:text-sm text-xs">
-                        Per page {services.total}/
-                        {services.to || services.length}
+                        Per page {galleries.total}/
+                        {galleries.to || galleries.length}
                         <label
                             onClick={(e) => {
                                 setEditClick(false);
@@ -128,7 +124,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             }}
                             className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
-                            Add Service
+                            Add Gallery
                         </label>
                     </div>
                 </div>
@@ -137,25 +133,18 @@ export default function Index({ auth, services, editData, isEditMode }) {
                         <thead className="bg-[#f8f8fb] border-t border-b border-[#E8E8E8]">
                             <tr className="border-none">
                                 <th className="py-3 font-medium">#</th>
-                                <th className="py-3 font-medium">Title</th>
                                 <th className="py-3 font-medium">Image</th>
-                                <th className="py-3 font-medium">
-                                    Description
-                                </th>
                                 <th className="py-3 font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {services.data.map((item, index) => (
+                            {galleries.data.map((item, index) => (
                                 <tr
                                     className="space-y-3 font-medium border-y border-[#E8E8E8] text-center"
                                     key={item.id}
                                 >
                                     <td className="text-sm py-4 font-normal">
                                         {index + 1}
-                                    </td>
-                                    <td className="text-sm py-4 font-normal">
-                                        {item.title}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
                                         <img
@@ -171,10 +160,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                             }
                                         />
                                     </td>
-
-                                    <td className="text-sm py-4 font-normal w-[200px]">
-                                        {item.description}
-                                    </td>
                                     <td className="text-sm py-4 font-normal">
                                         <div className="flex gap-2 justify-center">
                                             <label
@@ -188,7 +173,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                             </label>
                                             {/* <Link
                                                 href={route(
-                                                    "services.show",
+                                                    "galleries.show",
                                                     item.id
                                                 )}
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
@@ -210,23 +195,23 @@ export default function Index({ auth, services, editData, isEditMode }) {
                         </tbody>
                     </table>
                 </div>
-                {services && services.last_page > 1 && (
+                {galleries && galleries.last_page > 1 && (
                     <div className="join flex justify-center mt-6 w-full">
                         <Link
-                            href={services.prev_page_url || "#"}
+                            href={galleries.prev_page_url || "#"}
                             className={`join-item btn ${
-                                services.prev_page_url ? "" : "btn-disabled"
+                                galleries.prev_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             «
                         </Link>
                         <button className="join-item btn cursor-default bg-primary text-white">
-                            Page {services.current_page}
+                            Page {galleries.current_page}
                         </button>
                         <Link
-                            href={services.next_page_url || "#"}
+                            href={galleries.next_page_url || "#"}
                             className={`join-item btn ${
-                                services.next_page_url ? "" : "btn-disabled"
+                                galleries.next_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             »
@@ -240,80 +225,82 @@ export default function Index({ auth, services, editData, isEditMode }) {
                     Title="Change Image"
                 >
                     <form>
-                        <p className="block font-medium text-[15px] text-primary dark:text-secondary mb-[20px]">
+                        <h2 className="text-[18px] text-[#000] py-[15px] px-[20px] border border-b-[#E8E8E8]">
                             Image Change Here
-                        </p>
-                        <div className="">
-                            <InputLabel
-                                htmlFor="image"
-                                value="Image Attached"
-                            />
-                            <TextInput
-                                id="image"
-                                className="mt-1 block w-full"
-                                isFocused
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        const formData = new FormData();
-                                        formData.append("image", file);
-                                        formData.append("id", isItem.id); // Beneficiary ka ID bhejna zaroori hai
+                        </h2>
+                        <div className="px-[20px] py-[20px]">
+                            <div>
+                                <InputLabel
+                                    htmlFor="image"
+                                    value="Image Attached"
+                                />
+                                <TextInput
+                                    id="image"
+                                    className="mt-1 block w-full"
+                                    isFocused
+                                    onChange={(e) => {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            const formData = new FormData();
+                                            formData.append("image", file);
+                                            formData.append("id", isItem.id); // Beneficiary ka ID bhejna zaroori hai
 
-                                        router.post(
-                                            route("services.image"),
-                                            formData,
-                                            {
-                                                forceFormData: true,
-                                                onSuccess: () => {
-                                                    console.log(
-                                                        "Image updated successfully!"
-                                                    );
-                                                    setModalData(null)
-                                                },
-                                                onError: (errors) => {
-                                                    console.error(
-                                                        "Error uploading image:",
-                                                        errors
-                                                    );
-                                                },
-                                            }
-                                        );
-                                    }
-                                }}
-                                type="file"
-                            />
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 2xl:gap-4 mb-[25px]">
-                            {isItem && (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 2xl:gap-4 mb-[25px]">
-                                    <img
-                                        src={
-                                            isItem.image
-                                                ? `${window.location.origin}/storage/${isItem.image}`
-                                                : "/images/no-image.webp"
+                                            router.post(
+                                                route("galleries.image"),
+                                                formData,
+                                                {
+                                                    forceFormData: true,
+                                                    onSuccess: () => {
+                                                        console.log(
+                                                            "Image updated successfully!"
+                                                        );
+                                                        setModalData(null)
+                                                    },
+                                                    onError: (errors) => {
+                                                        console.error(
+                                                            "Error uploading image:",
+                                                            errors
+                                                        );
+                                                    },
+                                                }
+                                            );
                                         }
-                                        alt={isItem.title || "Image"}
-                                        className="w-full max-w-[200px] rounded"
-                                    />
-                                </div>
-                            )}
-                        </div>
+                                    }}
+                                    type="file"
+                                />
+                            </div>
+                            <div className="mt-[10px]">
+                                {isItem && (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 2xl:gap-4 mb-[25px]">
+                                        <img
+                                            src={
+                                                isItem.image
+                                                    ? `${window.location.origin}/storage/${isItem.image}`
+                                                    : "/images/no-image.webp"
+                                            }
+                                            alt={isItem.title || "Image"}
+                                            className="w-full max-w-[200px] h-[100px] object-cover rounded border border-c1 p-[10px]"
+                                        />
+                                    </div>
+                                )}
+                            </div>
 
-                        <div className="text-black flex gap-y-4 justify-between">
-                            <button
-                                type="button"
-                                onClick={closeModals}
-                                className="inline-flex items-center px-4 py-2 font-medium bg-custgreen border border-transparent rounded text-[14px] text-white capitalize hover:border-custgreen hover:bg-transparent hover:text-custgreen transition-all duration-500"
-                            >
-                                Close
-                            </button>
+                            <div className="text-black flex gap-y-4 justify-between">
+                                <button
+                                    type="button"
+                                    onClick={closeModals}
+                                    className="inline-flex items-center px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
+                                >
+                                    Close
+                                </button>
 
-                            <button
-                                type="submit"
-                                className="inline-flex items-center px-4 py-2 font-medium bg-custgreen border border-transparent rounded text-[14px] text-white capitalize hover:border-custgreen hover:bg-transparent hover:text-custgreen transition-all duration-500"
-                            >
-                                Save
-                            </button>
+                                <button
+                                    type="submit"
+                                    className="inline-flex items-center px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
+                                >
+                                    Save
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </Modal>
@@ -340,7 +327,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                         <div className="flex justify-between border-b px-[15px] py-[10px]">
                             <h2 className="text-[18px] text-[#000]">
                                 {editClick === true ? "Edit" : "Add New"}{" "}
-                                Service
+                                Gallery
                             </h2>
                             <label
                                 onClick={(e) => setSidebarState(false)}
@@ -353,23 +340,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             onSubmit={Datasubmit}
                             className="grid grid-cols-12 items-center gap-5 px-[15px] py-[20px]"
                         >
-                            <div className="col-span-12">
-                                <InputLabel
-                                    htmlFor="title"
-                                    value="Title*"
-                                />
-                                <TextInput
-                                    id="title"
-                                    type="text"
-                                    value={data.title}
-                                    onChange={(e) =>
-                                        setData("title", e.target.value)
-                                    }
-                                    required
-                                    className="mt-1 block w-full"
-                                />
-                                <InputError message={errors.title} />
-                            </div>
                             {!editClick && (
                                 <div className="col-span-12">
                                     <InputLabel
@@ -389,23 +359,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                     <InputError message={errors.image} />
                                 </div>
                             )}
-                            <div className="col-span-12">
-                                <InputLabel
-                                    htmlFor="description"
-                                    value="Description*"
-                                />
-                                <TextArea
-                                    id="description"
-                                    type="text"
-                                    value={data.description}
-                                    onChange={(e) =>
-                                        setData("description", e.target.value)
-                                    }
-                                    required
-                                    className="mt-1 block w-full"
-                                />
-                                <InputError message={errors.description} />
-                            </div>
                             <div className="flex items-center gap-4">
                                 {progress && (
                                     <progress

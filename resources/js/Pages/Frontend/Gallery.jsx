@@ -4,12 +4,12 @@ import Header from '@/FrontendComponents/Header/Header'
 import InnerBanner from '@/FrontendComponents/InnerBanner/InnerBanner'
 import React, { Fragment } from 'react'
 
-export default function Gallery() {
+export default function Gallery({gallery}) {
   return (
     <Fragment>
         <Header />
         <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="Our Gallery" />
-        <GallerySec />
+        <GallerySec gallery={gallery} />
         <Footer />
     </Fragment>
   )

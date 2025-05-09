@@ -14,7 +14,7 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import TextArea from "@/Components/TextArea";
 import Modal from "@/Components/Modal";
 
-export default function Index({ auth, services, editData, isEditMode }) {
+export default function Index({ auth, faqs, editData, isEditMode }) {
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -26,7 +26,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route("services.destroy", id), {
+                router.delete(route("faqs.destroy", id), {
                     onSuccess: () =>
                         Swal.fire(
                             "Deleted!",
@@ -57,7 +57,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
     } = useForm({
         id: "",
         title: "",
-        image: "",
         description: "",
     });
 
@@ -66,7 +65,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
             setData({
                 id: editData?.id || "",
                 title: editData?.title || "",
-                image: editData?.image || "",
                 description: editData?.description || "",
             });
         } else {
@@ -76,7 +74,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
 
     const handleEditClick = (item) => {
         setEditClick(true);
-        router.visit(route("services.index", { id: item.id }), {
+        router.visit(route("faqs.index", { id: item.id }), {
             preserveState: true,
             only: ["editData", "isEditMode"],
         });
@@ -86,13 +84,13 @@ export default function Index({ auth, services, editData, isEditMode }) {
     const Datasubmit = (e) => {
         e.preventDefault();
         editData
-            ? patch(route("services.update", editData?.id), {
+            ? patch(route("faqs.update", editData?.id), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
                   },
               })
-            : post(route("services.store"), {
+            : post(route("faqs.store"), {
                   onSuccess: () => {
                       reset();
                       setSidebarState(false);
@@ -114,13 +112,12 @@ export default function Index({ auth, services, editData, isEditMode }) {
 
     return (
         <AuthenticatedLayout auth={auth}>
-            <Head title="Services" />
+            <Head title="Faq" />
             <div className="bg-white p-[20px] rounded">
                 <div className="flex font-semibold items-center leading-tight text-primary justify-between mb-4">
-                    <h2 className="text-[18px] text-[#000]">All Services</h2>
+                    <h2 className="text-[18px] text-[#000]">All Faq</h2>
                     <div className="text-primary dark:text-secondary md:text-sm text-xs">
-                        Per page {services.total}/
-                        {services.to || services.length}
+                        Per page {faqs.total}/{faqs.to || faqs.length}
                         <label
                             onClick={(e) => {
                                 setEditClick(false);
@@ -128,7 +125,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             }}
                             className="inline-flex items-center ml-4 px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500"
                         >
-                            Add Service
+                            Add Faq
                         </label>
                     </div>
                 </div>
@@ -138,15 +135,12 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             <tr className="border-none">
                                 <th className="py-3 font-medium">#</th>
                                 <th className="py-3 font-medium">Title</th>
-                                <th className="py-3 font-medium">Image</th>
-                                <th className="py-3 font-medium">
-                                    Description
-                                </th>
+                                <th className="py-3 font-medium">Description</th>
                                 <th className="py-3 font-medium">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {services.data.map((item, index) => (
+                            {faqs.data.map((item, index) => (
                                 <tr
                                     className="space-y-3 font-medium border-y border-[#E8E8E8] text-center"
                                     key={item.id}
@@ -157,21 +151,6 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                     <td className="text-sm py-4 font-normal">
                                         {item.title}
                                     </td>
-                                    <td className="text-sm py-4 font-normal">
-                                        <img
-                                            src={
-                                                item.image
-                                                    ? `${window.location.origin}/storage/${item.image}`
-                                                    : "/images/no-image.webp"
-                                            }
-                                            alt={item.title}
-                                            className="w-10 h-10 object-cover mx-auto cursor-pointer"
-                                            onClick={() =>
-                                                handleModalClick(item)
-                                            }
-                                        />
-                                    </td>
-
                                     <td className="text-sm py-4 font-normal w-[200px]">
                                         {item.description}
                                     </td>
@@ -188,7 +167,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                             </label>
                                             {/* <Link
                                                 href={route(
-                                                    "services.show",
+                                                    "faqs.show",
                                                     item.id
                                                 )}
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
@@ -210,23 +189,23 @@ export default function Index({ auth, services, editData, isEditMode }) {
                         </tbody>
                     </table>
                 </div>
-                {services && services.last_page > 1 && (
+                {faqs && faqs.last_page > 1 && (
                     <div className="join flex justify-center mt-6 w-full">
                         <Link
-                            href={services.prev_page_url || "#"}
+                            href={faqs.prev_page_url || "#"}
                             className={`join-item btn ${
-                                services.prev_page_url ? "" : "btn-disabled"
+                                faqs.prev_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             «
                         </Link>
                         <button className="join-item btn cursor-default bg-primary text-white">
-                            Page {services.current_page}
+                            Page {faqs.current_page}
                         </button>
                         <Link
-                            href={services.next_page_url || "#"}
+                            href={faqs.next_page_url || "#"}
                             className={`join-item btn ${
-                                services.next_page_url ? "" : "btn-disabled"
+                                faqs.next_page_url ? "" : "btn-disabled"
                             }`}
                         >
                             »
@@ -260,7 +239,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                         formData.append("id", isItem.id); // Beneficiary ka ID bhejna zaroori hai
 
                                         router.post(
-                                            route("services.image"),
+                                            route("faqs.image"),
                                             formData,
                                             {
                                                 forceFormData: true,
@@ -268,7 +247,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                                     console.log(
                                                         "Image updated successfully!"
                                                     );
-                                                    setModalData(null)
+                                                    setModalData(null);
                                                 },
                                                 onError: (errors) => {
                                                     console.error(
@@ -339,8 +318,7 @@ export default function Index({ auth, services, editData, isEditMode }) {
                     <ul className="bg-white min-h-full p-0 dark:bg-primary">
                         <div className="flex justify-between border-b px-[15px] py-[10px]">
                             <h2 className="text-[18px] text-[#000]">
-                                {editClick === true ? "Edit" : "Add New"}{" "}
-                                Service
+                                {editClick === true ? "Edit" : "Add New"} Faq
                             </h2>
                             <label
                                 onClick={(e) => setSidebarState(false)}
@@ -356,7 +334,9 @@ export default function Index({ auth, services, editData, isEditMode }) {
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="title"
-                                    value="Title*"
+                                    value={`Title${
+                                        editClick === true ? "" : "*"
+                                    }`}
                                 />
                                 <TextInput
                                     id="title"
@@ -370,29 +350,12 @@ export default function Index({ auth, services, editData, isEditMode }) {
                                 />
                                 <InputError message={errors.title} />
                             </div>
-                            {!editClick && (
-                                <div className="col-span-12">
-                                    <InputLabel
-                                        htmlFor="image"
-                                        value="Image*"
-                                    />
-                                    <TextInput
-                                        id="image"
-                                        type="file"
-                                        value={data.image}
-                                        onChange={(e) =>
-                                            setData("image", e.target.files[0])
-                                        }
-                                        required
-                                        className="mt-1 block w-full"
-                                    />
-                                    <InputError message={errors.image} />
-                                </div>
-                            )}
                             <div className="col-span-12">
                                 <InputLabel
                                     htmlFor="description"
-                                    value="Description*"
+                                    value={`Description${
+                                        editClick === true ? "" : "*"
+                                    }`}
                                 />
                                 <TextArea
                                     id="description"

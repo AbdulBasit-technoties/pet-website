@@ -6,13 +6,13 @@ import React, { Fragment } from 'react'
 import WhatWeDo from '@/FrontendComponents/WhatWeDo/WhatWeDo'
 import FAQSection from '@/FrontendComponents/FAQSection/FAQSection'
 
-export default function AboutUs() {
+export default function AboutUs({faqs}) {
     return (
         <Fragment>
             <Header />
             <InnerBanner image="/FrontendImages/inner-banner.jpeg" title="About Us" />
             <WhoWeAre/>
-            <FAQSection/>
+            <FAQSection faqs={faqs} />
             <WhatWeDo/>
             <Footer />
         </Fragment>

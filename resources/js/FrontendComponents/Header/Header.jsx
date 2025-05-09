@@ -3,6 +3,7 @@ import React, { Fragment, useState } from "react";
 import OutLineButton from "../Button/OutLineButton";
 import { IoCallOutline, IoMenuSharp } from "react-icons/io5";
 import { MdMenuOpen, MdOutlineEmail } from "react-icons/md";
+import { AiOutlineMail } from "react-icons/ai";
 import Navbar from "../Navbar/Navbar";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
@@ -13,9 +14,9 @@ export default function Header() {
             <header className="header">
                 <div className="top-header py-3">
                     <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[40px] 2xl:px-[50px]">
-                        <div className="grid grid-cols-2 items-center justify-between gap-y-4">
+                        <div className="grid grid-cols-12 items-center justify-between gap-y-4">
                             {/* Logo Section */}
-                            <div className="flex">
+                            <div className="flex col-span-4">
                                 <div className="logo">
                                     <Link
                                         href={route("home")}
@@ -31,8 +32,8 @@ export default function Header() {
                             </div>
 
                             {/* Buttons Section */}
-                            <div className="flex justify-end items-center gap-4">
-                                <ul className="flex justify-center sm:justify-end items-center gap-3 order-2">
+                            <div className="flex justify-end items-center gap-4 col-span-8">
+                                <ul className="flex justify-center sm:justify-end items-center gap-3 order-2 lg:hidden">
                                     <li>
                                         <a
                                             href="tel:07791043791"
@@ -58,11 +59,17 @@ export default function Header() {
                                         </span>
                                     </li>
                                 </ul>
+                                <div className="hidden lg:block">
+                                    <ul className="flex items-center gap-[20px]">
+                                        <li className="flex items-center gap-[10px] xl:text-[17px]"><AiOutlineMail /><a href="mailto:Abbeyfarmbusiness@outlook.com" className="transition-all duration-500 hover:text-c1">Abbeyfarmbusiness@outlook.com</a></li>
+                                        <li className="flex items-center gap-[10px] xl:text-[17px]"><IoCallOutline /><a href="tel:07791043791" className="transition-all duration-500 hover:text-c1">07791043791</a></li>
+                                    </ul>
+                                </div>
 
                                 <div className="justify-center sm:justify-end order-1 hidden sm:block">
                                     <OutLineButton
                                         title="Book Now"
-                                        link={route("bookings.index")}
+                                        link="#"
                                         css="fill"
                                     />
                                 </div>

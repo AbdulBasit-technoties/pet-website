@@ -12,7 +12,7 @@ export default function MobileMenu({openMenu, setOpenMenu}) {
     return (
         <Fragment>
             <nav className={` ${openMenu === true ? "left-0" : "-left-full"} transition-all duration-500 ease-in fixed w-full h-full top-0  bg-white z-50`}>
-                <div className="px-10 flex justify-between items-center mt-10">
+                <div className="px-5 sm:px-8 pt-5 flex justify-between items-center">
                     <div className="logo">
                         <Link
                             href={route("home")}
@@ -31,7 +31,7 @@ export default function MobileMenu({openMenu, setOpenMenu}) {
                         </button>
                     </div>
                 </div>
-                <div className="menu px-10">
+                <div className="menu px-5 sm:px-8">
                     <div className="nav-bar">
                         <ul className="flex flex-col gap-y-5 mt-14">
                             <li className="overflow-hidden border-b relative before:absolute before:bottom-0 before:-left-full before:w-full hover:before:left-0 before:transition-all before:duration-300 before:ease-in hover:text-c1 before:h-[1px] before:bg-c1 pb-2">
@@ -76,7 +76,7 @@ export default function MobileMenu({openMenu, setOpenMenu}) {
                             </li>
                             <li className="overflow-hidden border-b relative before:absolute before:bottom-0 before:-left-full before:w-full hover:before:left-0 before:transition-all before:duration-300 before:ease-in hover:text-c1 before:h-[1px] before:bg-c1 pb-2">
                                 <Link
-                                    href={route("galleries.index")}
+                                    href={route("galleries.front")}
                                     className="text-[#4d5267] xl:text-[18px] transition-all duration-500 hover:text-c1"
                                 >
                                     Gallery

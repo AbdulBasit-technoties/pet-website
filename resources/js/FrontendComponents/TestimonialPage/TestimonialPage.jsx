@@ -4,13 +4,13 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 export default function TestimonialPage({ testimonials }) {
     return (
         <Fragment>
-            <section className="testimonial relative py-[80px] 2xl:py-[100px]">
-                <div className="container mx-auto">
-                    <div className="grid grid-cols-12 mx-[100px] 2xl:mx-[150px] gap-5">
+            <section className="testimonial relative py-[50px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]">
+                <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[40px] 2xl:px-[50px]">
+                    <div className="grid grid-cols-12 gap-5">
                         {testimonials.map((item, index) => {
                             return (
-                                <div className="col-span-6">
-                                    <div className="testi-item-box py-[30px] px-[30px] relative h-full bg-white border border-c1 rounded-md">
+                                <div className="col-span-12 md:col-span-6">
+                                    <div className="testi-item-box py-[30px] lg:px-[30px] px-[25px] relative h-full bg-white border border-c1 rounded-md">
                                         <ul className="flex items-center gap-[5px]">
                                             {[...Array(5)].map((_, index) => (
                                                 <li
@@ -29,7 +29,7 @@ export default function TestimonialPage({ testimonials }) {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <p className="text-[18px] mt-[20px] mb-[30px]">
+                                        <p className="sm:text-[18px] mt-[20px] mb-[30px]">
                                             {item.comment || "N/A"}
                                         </p>
                                         <div className="author-main flex items-center gap-[20px]">
@@ -40,18 +40,18 @@ export default function TestimonialPage({ testimonials }) {
                                                         : "/images/no-image.webp"
                                                 }
                                                 alt="Image"
-                                                className="w-[70px] h-[70px] rounded-full object-cover"
+                                                className="w-[60px] h-[60px] xl:h-[70px] rounded-full object-cover xl:w-[70px]"
                                             />
                                             <div className="author-name">
-                                                <h4 className="text-[#151515] font-medium text-lg">
+                                                <h4 className="text-[#151515] font-medium text-[16px] xl:text-lg">
                                                     {item.name || "N/A"}
                                                 </h4>
-                                                <span className="text-c3 text-lg">
+                                                <span className="text-c3 text-[14px] xl:text-lg">
                                                     {item.country.name || "N/A"}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="testi-icon absolute bottom-[20px] right-[20px] w-[50px]">
+                                        <div className="testi-icon absolute bottom-[20px] right-[20px] w-[30px] xl:w-[50px]">
                                             <img
                                                 src="/FrontendImages/quote.png"
                                                 alt="Image"

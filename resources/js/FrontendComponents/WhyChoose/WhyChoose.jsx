@@ -36,17 +36,17 @@ export default function WhyChoose() {
     return (
         <Fragment>
             <ToastContainer />
-            <section className="py-[80px] 2xl:py-[100px] work bg-custbg">
-                <div className="container mx-auto 2xl:px-[50px] px-[40px]">
-                    <div className="grid items-center grid-cols-2 gap-x-[100px]">
-                        <div className="">
+            <section className="py-[50px] md:py-[60px] xl:py-[80px] 2xl:py-[100px] work bg-custbg">
+                <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[40px] 2xl:px-[50px]">
+                    <div className="grid items-center grid-cols-12 md:gap-x-[50px] xl:gap-x-[100px]">
+                        <div className="col-span-12 lg:col-span-6">
                             <h6 className="mb-4 text-[20px] 2xl:text-[24px] font-medium text-c1">
                                 How it work?
                             </h6>
                             <h2 className="text-[#404040] capitalize text-[24px] sm:text-[28px] lg:text-[34px] 2xl:text-[40px] 2xl:mb-[70px] lg:mb-[50px] md:mb-[40px] mb-[30px] font-semibold">
                                 the amazing steps of our Services
                             </h2>
-                            <div className="flex gap-10 item-center mb-[70px]">
+                            <div className="flex gap-[20px] xl:gap-10 item-center mb-[40px] sm:mb-[70px]">
                                 <span className='relative flex items-center justify-center h-16 text-2xl font-semibold w-44 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-90px]  before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
                                     1
                                 </span>
@@ -63,7 +63,7 @@ export default function WhyChoose() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-10 item-center mb-[70px]">
+                            <div className="flex gap-[20px] xl:gap-10 item-center mb-[40px] sm:mb-[70px]">
                                 <span className='relative flex items-center justify-center w-44  text-2xl font-semibold h-16 rounded-xl text-c4 bg-c1 before:content-[""] before:absolute before:bottom-[-90px] before:left-1/2 before:transfrom before:-translate-x-1/2 before:w-1 before:h-16 before:bg-c1'>
                                     2
                                 </span>
@@ -80,7 +80,7 @@ export default function WhyChoose() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex gap-10 item-center mb-[70px]">
+                            <div className="flex gap-[20px] xl:gap-10 item-center mb-[40px] lg:mb-[70px]">
                                 <span className="relative flex items-center justify-center h-16 text-2xl font-semibold w-44 rounded-xl text-c4 bg-c1 ">
                                     3
                                 </span>
@@ -98,16 +98,20 @@ export default function WhyChoose() {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-6 py-10 xl:px-10 xl:py-16 rounded-2xl bg-c1">
-                            <h5 className="mb-6 text-4xl font-semibold capitalize text-c4">
+                        <div className="px-6 py-10 xl:px-10 xl:py-16 rounded-2xl bg-c1 col-span-12 lg:col-span-6">
+                            <h5 className="mb-6 text-[30px] xl:text-[36px] font-semibold capitalize text-center sm:text-left text-c4">
                                 Get In touch
                             </h5>
                             <form
                                 onSubmit={Datasubmit}
-                                className="grid grid-cols-12 items-center gap-5 px-[15px] py-[20px]"
+                                className="grid grid-cols-12 items-center gap-5"
                             >
                                 <div className="col-span-12">
-                                    <InputLabel htmlFor="name" value="Name" />
+                                    <InputLabel 
+                                        htmlFor="name"
+                                        value="Name" 
+                                        className="text-white"
+                                    />
                                     <TextInput
                                         id="name"
                                         type="text"
@@ -121,7 +125,11 @@ export default function WhyChoose() {
                                     <InputError message={errors.name} />
                                 </div>
                                 <div className="col-span-12">
-                                    <InputLabel htmlFor="email" value="Email" />
+                                    <InputLabel 
+                                        htmlFor="email"
+                                        value="Email"
+                                        className="text-white"
+                                    />
                                     <TextInput
                                         id="email"
                                         type="email"
@@ -135,7 +143,11 @@ export default function WhyChoose() {
                                     <InputError message={errors.email} />
                                 </div>
                                 <div className="col-span-12">
-                                    <InputLabel htmlFor="phone" value="Phone" />
+                                    <InputLabel 
+                                        htmlFor="phone" 
+                                        value="Phone"
+                                        className="text-white" 
+                                    />
                                     <TextInput
                                         id="phone"
                                         type="number"
@@ -152,6 +164,7 @@ export default function WhyChoose() {
                                     <InputLabel
                                         htmlFor="message"
                                         value="Message*"
+                                        className="text-white"
                                     />
                                     <TextArea
                                         id="message"
@@ -174,7 +187,7 @@ export default function WhyChoose() {
                                             {progress.percentage}%
                                         </progress>
                                     )}
-                                    <button type="submit" className="inline-flex items-center px-4 py-2 font-medium bg-c1 border border-transparent rounded text-[14px] text-white capitalize hover:border-c1 hover:bg-transparent hover:text-c1 transition-all duration-500">Save</button>
+                                    <button type="submit" className="xl:text-[18px] font-medium transition-all border border-c2 mt-[10px] duration-500 rounded-md cursor-pointer py-[12px] px-[30px] bg-c2 hover:bg-c1 hover:text-white text-black">Submit</button>
 
                                     <Transition
                                         show={recentlySuccessful}

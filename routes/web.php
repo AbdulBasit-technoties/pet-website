@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\RoleController;
 use App\Models\Services;
@@ -44,8 +45,12 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('services', ServicesController::class);
     Route::post('services-image', [ServicesController::class, "ServiceImage"])->name('services.image');
     Route::resource('testimonials', TestimonialController::class);
+    Route::resource('galleries', GalleryController::class);
+    Route::resource('faqs', FaqController::class);
+    
     Route::resource('queries', QueryController::class);
     Route::post('testimonials-image', [TestimonialController::class, "TestimonialImage"])->name('testimonials.image');
+    Route::post('galleries-image', [GalleryController::class, "GalleryImage"])->name('galleries.image');
     Route::resource('countries', CountryController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -54,14 +59,14 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('our-services', [ServicesController::class, "FrontIndex"])->name('services.front');
 Route::get('testimonials', [TestimonialController::class, "FrontIndex"])->name('testimonials.front');
+Route::get('galleries', [GalleryController::class, "FrontIndex"])->name('galleries.front');
+
 Route::post('queries', [QueryController::class, "FrontStore"])->name('queries.add');
 
 Route::resource('about-us', AboutUsController::class);
 Route::resource('contact-us', ContactUsController::class);
-Route::resource('galleries', GalleryController::class);
 Route::resource('bookings', BookingController::class);
 
 

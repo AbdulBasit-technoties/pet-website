@@ -183,7 +183,7 @@ export default function Index({
                                             }
                                         />
                                     </td>
-                                    <td className="text-sm py-4 font-normal">
+                                    <td className="text-sm py-4 font-normal w-[200px]">
                                         {item.comment}
                                     </td>
                                     <td className="text-sm py-4 font-normal">
@@ -200,7 +200,7 @@ export default function Index({
                                             >
                                                 <IoPencilOutline />
                                             </label>
-                                            <Link
+                                            {/* <Link
                                                 href={route(
                                                     "testimonials.show",
                                                     item.id
@@ -208,7 +208,7 @@ export default function Index({
                                                 className=" hover:bg-c1 transition-all duration-500 hover:text-white text-[18px] w-[30px] h-[30px] bg-[#f8f8fb] flex items-center justify-center rounded cursor-pointer"
                                             >
                                                 <IoEyeOutline />
-                                            </Link>
+                                            </Link> */}
                                             <button
                                                 onClick={() =>
                                                     handleDelete(item.id)

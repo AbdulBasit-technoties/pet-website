@@ -1,21 +1,6 @@
 import React, { useState, Fragment } from 'react';
 
-const faqs = [
-  {
-    question: "Do you offer grooming services?",
-    answer: "Yes, we offer full grooming services for dogs and cats, including baths, haircuts, nail trimming, and ear cleaning."
-  },
-  {
-    question: "Do you offer delivery for pet products?",
-    answer: "Yes, we offer local delivery for pet supplies within a certain radius. Delivery charges may apply, and we also provide express shipping for online orders."
-  },
-  {
-    question: "Are your toys and accessories eco-friendly?",
-    answer: "We strive to carry eco-friendly and sustainable pet toys and accessories. Many of our products are made from recycled or biodegradable materials."
-  }
-];
-
-export default function FAQSection() {
+export default function FAQSection({faqs}) {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -24,14 +9,14 @@ export default function FAQSection() {
 
   return (
     <Fragment>
-      <section className="bg-custbg py-14 px-4 sm:px-6 lg:px-8">
-        <div className='container mx-auto 2xl:px-[50px] px-[40px]'>
+      <section className="bg-custbg py-[50px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]">
+        <div className='container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[40px] 2xl:px-[50px]'>
           <div className="text-center">
-            <h2 className="text-[#34495e] text-[34px] 2xl:text-[40px] 2xl:mb-[60px] mb-[50px] font-semibold">
+            <h2 className="text-[#34495e] text-[24px] sm:text-[28px] lg:text-[34px] 2xl:text-[40px] 2xl:mb-[70px] lg:mb-[50px] md:mb-[40px] mb-[30px] font-semibold">
               Frequently Asked Question's
             </h2>
           </div>
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="xl:w-[80%] 2xl:w-[70%] mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div key={index} className="rounded-md border border-c1 bg-white shadow">
                 <button
@@ -43,8 +28,8 @@ export default function FAQSection() {
                             openIndex === index ? 'bg-c1' : ''
                         }`}
                         >
-                        <span className={`font-semibold text-lg ${openIndex === index ? 'text-white' : 'text-[#34495e]'}`}>
-                            {faq.question}
+                        <span className={`font-semibold text-[16px] lg:text-lg ${openIndex === index ? 'text-white' : 'text-[#34495e]'}`}>
+                            {faq.title}
                         </span>
                         <span className={`text-2xl ${openIndex === index ? 'text-white' : 'text-c1'}`}>
                             {openIndex === index ? '−' : '+'}
@@ -56,7 +41,7 @@ export default function FAQSection() {
                       openIndex === index ? 'max-h-40 opacity-100 py-4' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="text-[#34495e]">{faq.answer}</p>
+                    <p className="text-[#34495e]">{faq.description}</p>
                   </div>
                 </button>
               </div>

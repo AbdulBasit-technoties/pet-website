@@ -8,6 +8,8 @@ return [
         'services',
         'testimonials',
         'countries',
-        'queries'
+        'queries',
+        'galleries',
+        'faqs'
     ],
 ];
