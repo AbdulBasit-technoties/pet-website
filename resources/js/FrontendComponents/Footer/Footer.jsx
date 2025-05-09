@@ -34,28 +34,33 @@ export default function Footer() {
                                 </span>
                                 <ul>
                                     <li className="overflow-hidden mb-[8px]">
-                                        <Link className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
-                                            Services
+                                        <Link href={route('home')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                            Home
                                         </Link>
                                     </li>
                                     <li className="overflow-hidden mb-[8px]">
-                                        <Link className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
-                                            Terms & Conditions
-                                        </Link>
-                                    </li>
-                                    <li className="overflow-hidden mb-[8px]">
-                                        <Link className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
-                                            Privacy Policy
-                                        </Link>
-                                    </li>
-                                    <li className="overflow-hidden mb-[8px]">
-                                        <Link className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                        <Link href={route('about-us.index')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
                                             About Us
                                         </Link>
                                     </li>
                                     <li className="overflow-hidden mb-[8px]">
-                                        <Link className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                        <Link href={route('services.front')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                            Services
+                                        </Link>
+                                    </li>
+                                    <li className="overflow-hidden mb-[8px]">
+                                        <Link href={route('testimonials.front')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                            Testimonial
+                                        </Link>
+                                    </li>
+                                    <li className="overflow-hidden mb-[8px]">
+                                        <Link href={route('contact-us.index')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
                                             Contact Us
+                                        </Link>
+                                    </li>
+                                    <li className="overflow-hidden mb-[8px]">
+                                        <Link href={route('galleries.front')} className="text-white xl:text-[18px] transition-all duration-500 hover:text-black relative before:absolute before:bottom-0 before:left-[-100%] before:w-full before:h-[2px] before:bg-black before:transition-all before:duration-500 overflow-hidden hover:before:left-0">
+                                            Gallery
                                         </Link>
                                     </li>
                                 </ul>
