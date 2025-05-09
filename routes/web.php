@@ -12,6 +12,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\RoleController;
 use App\Models\Services;
+use App\Models\Testimonial;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'services' => Services::latest()->take(5)->get(),
+        'testimonials' => Testimonial::with('country')->latest()->take(5)->get(),
     ]);
 })->name('home');
 

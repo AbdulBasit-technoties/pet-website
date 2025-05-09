@@ -11,7 +11,7 @@ use App\Models\Country;
 class TestimonialController extends Controller
 {
     public function FrontIndex() {
-        $testimonials = Testimonial::latest()->take(5)->get();
+        $testimonials = Testimonial::with('country')->latest()->take(5)->get();
         return Inertia::render('Frontend/Testimonials',[
             'testimonials' => $testimonials,
         ]);

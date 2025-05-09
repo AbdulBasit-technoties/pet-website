@@ -10,7 +10,7 @@ import WeCare from '@/FrontendComponents/WeCare/WeCare'
 import WhyChoose from '@/FrontendComponents/WhyChoose/WhyChoose'
 import React, { Fragment } from 'react'
 
-export default function Home({services}) {
+export default function Home({services,testimonials}) {
     return (
         <Fragment>
             <Header />
@@ -21,7 +21,7 @@ export default function Home({services}) {
             <PetPassport />
             <OurTeam />
             <WeCare />
-            <Testimonial />
+            <Testimonial testimonials={testimonials} />
             <Footer />
         </Fragment>
     )

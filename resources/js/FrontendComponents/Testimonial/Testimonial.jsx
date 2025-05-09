@@ -2,9 +2,9 @@ import { Link } from "@inertiajs/react";
 import React, { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { FaRegStar } from "react-icons/fa6";
+import { FaRegStar, FaStar } from "react-icons/fa6";
 
-export default function Testimonial() {
+export default function Testimonial({ testimonials }) {
     return (
         <Fragment>
             <section className="testimonial mt-[-60px] 2xl:mt-[-100px] relative 2xl:mb-[100px] xl:mb-[80px] md:mb-[60px] mb-[50px]">
@@ -36,141 +36,65 @@ export default function Testimonial() {
                                 onSwiper={(swiper) => console.log(swiper)}
                                 className="h-full"
                             >
-                                <SwiperSlide className="h-full">
-                                    <div className="testi-item-box py-[30px] sm:px-[30px] px-[20px] relative h-full bg-white">
-                                        <ul className="flex items-center gap-[5px]">
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                        </ul>
-                                        <p className="sm:text-[18px] mt-[20px] mb-[30px]">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur. Cursus volutpat aliquet
-                                            mauris mauris fringilla bibendum
-                                            lorem sed. Nec amet neque phasellus
-                                            nec sollicitudin sit. Et egeLorem
-                                            ipsum dolor sit amet consectetur.
-                                            Cursus volutpat aliquet mauris
-                                            mauris fringilla bibendum lorem s
-                                        </p>
-                                        <div className="author-main flex items-center gap-[20px]">
-                                            <img
-                                                src="/FrontendImages/Ellipse8.webp"
-                                                alt="Image"
-                                                className="w-[60px] xl:w-[70px]"
-                                            />
-                                            <div className="author-name">
-                                                <h4 className="text-[#151515] font-medium text-[15px] xl:text-lg">July Benjamin</h4>
-                                                <span className="text-c3 text-[13px] xl:text-lg">Canada</span>
+                                {testimonials.map((item, index) => {
+                                    return (
+                                        <SwiperSlide className="h-full">
+                                            <div className="testi-item-box py-[30px] sm:px-[30px] px-[20px] relative h-full bg-white">
+                                                <ul className="flex items-center gap-[5px]">
+                                                    {[...Array(5)].map(
+                                                        (_, index) => (
+                                                            <li
+                                                                key={index}
+                                                                className={`text-[20px] ${
+                                                                    index <
+                                                                    item.rating
+                                                                        ? "text-yellow-400"
+                                                                        : "text-c2"
+                                                                }`}
+                                                            >
+                                                                {index <
+                                                                item.rating ? (
+                                                                    <FaStar />
+                                                                ) : (
+                                                                    <FaRegStar />
+                                                                )}
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                                <p className="sm:text-[18px] mt-[20px] mb-[30px]">
+                                                    {item.comment || "N/A"}
+                                                </p>
+                                                <div className="author-main flex items-center gap-[20px]">
+                                                    <img
+                                                        src={
+                                                            item.image
+                                                                ? `${window.location.origin}/storage/${item.image}`
+                                                                : "/images/no-image.webp"
+                                                        }
+                                                        alt="Image"
+                                                        className="w-[60px] h-[60px] xl:h-[70px] rounded-full object-cover xl:w-[70px]"
+                                                    />
+                                                    <div className="author-name">
+                                                        <h4 className="text-[#151515] font-medium text-[15px] xl:text-lg">
+                                                            {item.name || "N/A"}
+                                                        </h4>
+                                                        <span className="text-c3 text-[13px] xl:text-lg">
+                                                            {item.country
+                                                                .name || "N/A"}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="testi-icon absolute bottom-[20px] right-[20px] w-[30px] xl:w-[50px]">
+                                                    <img
+                                                        src="/FrontendImages/quote.png"
+                                                        alt="Image"
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="testi-icon absolute bottom-[20px] right-[20px] w-[30px] xl:w-[50px]">
-                                          <img src="/FrontendImages/quote.png" alt="Image" />
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide className="h-full">
-                                    <div className="testi-item-box py-[30px] sm:px-[30px] px-[20px] relative h-full bg-white">
-                                        <ul className="flex items-center gap-[5px]">
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                        </ul>
-                                        <p className="sm:text-[18px] mt-[20px] mb-[30px]">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur. Cursus volutpat aliquet
-                                            mauris mauris fringilla bibendum
-                                            lorem sed. Nec amet neque phasellus
-                                            nec sollicitudin sit. Et egeLorem
-                                            ipsum dolor sit amet consectetur.
-                                            Cursus volutpat aliquet mauris
-                                            mauris fringilla bibendum lorem s
-                                        </p>
-                                        <div className="author-main flex items-center gap-[20px]">
-                                            <img
-                                                src="/FrontendImages/Ellipse8.webp"
-                                                alt="Image"
-                                                className="w-[60px] xl:w-[70px]"
-                                            />
-                                            <div className="author-name">
-                                                <h4 className="text-[#151515] font-medium text-[15px] xl:text-lg">July Benjamin</h4>
-                                                <span className="text-c3 text-[13px] xl:text-lg">Canada</span>
-                                            </div>
-                                        </div>
-                                        <div className="testi-icon absolute bottom-[20px] right-[20px] w-[30px] xl:w-[50px]">
-                                          <img src="/FrontendImages/quote.png" alt="Image" />
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide className="h-full">
-                                    <div className="testi-item-box py-[30px] sm:px-[30px] px-[20px] relative h-full bg-white">
-                                        <ul className="flex items-center gap-[5px]">
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                            <li className="text-c2 text-[20px]">
-                                                <FaRegStar />
-                                            </li>
-                                        </ul>
-                                        <p className="sm:text-[18px] mt-[20px] mb-[30px]">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur. Cursus volutpat aliquet
-                                            mauris mauris fringilla bibendum
-                                            lorem sed. Nec amet neque phasellus
-                                            nec sollicitudin sit. Et egeLorem
-                                            ipsum dolor sit amet consectetur.
-                                            Cursus volutpat aliquet mauris
-                                            mauris fringilla bibendum lorem s
-                                        </p>
-                                        <div className="author-main flex items-center gap-[20px]">
-                                            <img
-                                                src="/FrontendImages/Ellipse8.webp"
-                                                alt="Image"
-                                                className="w-[60px] xl:w-[70px]"
-                                            />
-                                            <div className="author-name">
-                                                <h4 className="text-[#151515] font-medium text-[15px] xl:text-lg">July Benjamin</h4>
-                                                <span className="text-c3 text-[13px] xl:text-lg">Canada</span>
-                                            </div>
-                                        </div>
-                                        <div className="testi-icon absolute bottom-[20px] right-[20px] w-[30px] xl:w-[50px]">
-                                          <img src="/FrontendImages/quote.png" alt="Image" />
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+                                        </SwiperSlide>
+                                    );
+                                })}
                             </Swiper>
                         </div>
                     </div>
