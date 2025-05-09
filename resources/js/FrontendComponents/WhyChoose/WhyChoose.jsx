@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 export default function WhyChoose() {
     const { data, setData, post, progress, recentlySuccessful, errors, reset } =
         useForm({
-            id: "",
             name: "",
             email: "",
             phone: "",
