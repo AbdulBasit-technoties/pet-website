@@ -40,7 +40,7 @@ export default function OurTeam() {
                                 face in dating and relationships
                             </p>
                             <Link
-                                href="/"
+                                href={route("contact-us.index")}
                                 className="border-2 border-c1 rounded-[50px] py-[10px] px-[20px] md:px-[30px] 2xl:px-[40px] flex items-center w-max text-[16px] md:text-[18px] 2xl:text-[22px] text-c1 transition-all duration-500 hover:bg-c1 hover:text-white font-medium"
                             >
                                 Contact Us

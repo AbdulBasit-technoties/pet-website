@@ -1,12 +1,13 @@
 import { Link } from "@inertiajs/react";
 import React, { Fragment } from "react";
+import { AiOutlineMail } from "react-icons/ai";
 import {
     FaFacebookF,
     FaInstagram,
     FaLinkedinIn,
     FaWhatsapp,
 } from "react-icons/fa6";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCallOutline, IoCloseSharp } from "react-icons/io5";
 
 export default function MobileMenu({openMenu, setOpenMenu}) {
     return (
@@ -33,7 +34,7 @@ export default function MobileMenu({openMenu, setOpenMenu}) {
                 </div>
                 <div className="menu px-5 sm:px-8">
                     <div className="nav-bar">
-                        <ul className="flex flex-col gap-y-5 mt-14">
+                        <ul className="flex flex-col gap-y-3 mt-14">
                             <li className="overflow-hidden border-b relative before:absolute before:bottom-0 before:-left-full before:w-full hover:before:left-0 before:transition-all before:duration-300 before:ease-in hover:text-c1 before:h-[1px] before:bg-c1 pb-2">
                                 <Link
                                     href={route("home")}
@@ -82,8 +83,24 @@ export default function MobileMenu({openMenu, setOpenMenu}) {
                                     Gallery
                                 </Link>
                             </li>
+                            <li className="overflow-hidden border-b relative before:absolute before:bottom-0 before:-left-full before:w-full hover:before:left-0 before:transition-all before:duration-300 before:ease-in hover:text-c1 before:h-[1px] before:bg-c1 pb-2">
+                                <a
+                                    href="https://calendly.com/abbeyfarmbusiness/"
+                                    className="text-[#4d5267] xl:text-[18px] transition-all duration-500 hover:text-c1"
+                                    target="_blank"
+                                >
+                                    Book Now
+                                </a>
+                            </li>
                         </ul>
+                        <div className="lg:block">
+                            <ul className="flex flex-col gap-[10px] mt-[20px]">
+                                <li className="flex items-center gap-[10px] xl:text-[17px] text-[#4d5267]"><AiOutlineMail /><a href="mailto:Abbeyfarmbusiness@outlook.com" className="transition-all duration-500 hover:text-c1 text-[#4d5267]">Abbeyfarmbusiness@outlook.com</a></li>
+                                <li className="flex items-center gap-[10px] xl:text-[17px] text-[#4d5267]"><IoCallOutline /><a href="tel:07791043791" className="transition-all duration-500 hover:text-c1 text-[#4d5267]">07791043791</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    
                 </div>
                 <div className="footer fixed bottom-0 w-full">
                     <ul className="flex bg-c1 justify-center py-3 text-white items-center gap-[30px]">

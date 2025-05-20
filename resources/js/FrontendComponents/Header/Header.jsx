@@ -34,7 +34,7 @@ export default function Header() {
                             {/* Buttons Section */}
                             <div className="flex justify-end items-center gap-4 col-span-8">
                                 <ul className="flex justify-center sm:justify-end items-center gap-3 order-2 lg:hidden">
-                                    <li>
+                                    {/* <li>
                                         <a
                                             href="tel:07791043791"
                                             className="w-[35px] h-[35px] sm:w-[42px] sm:h-[42px] bg-custbg flex items-center justify-center rounded text-[rgba(77, 82, 103, 1)] text-[20px] sm:text-[24px] transition-all duration-500 hover:bg-c1 hover:text-white"
@@ -49,7 +49,7 @@ export default function Header() {
                                         >
                                             <MdOutlineEmail />
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li className="lg:hidden block">
                                         <span
                                             onClick={() => setOpenMenu(true)}
@@ -66,12 +66,14 @@ export default function Header() {
                                     </ul>
                                 </div>
 
-                                <div className="justify-center sm:justify-end order-1 hidden sm:block">
-                                    <OutLineButton
+                                <div className="justify-center sm:justify-end order-1 block">
+                                    <a href="https://calendly.com/abbeyfarmbusiness/" className="px-4 py-2 border rounded transition duration-300 bg-c1 text-white hover:bg-transparent hover:text-c1 border-c1" target="_blank">Book Now</a>
+                                    {/* <OutLineButton
                                         title="Book Now"
-                                        link="#"
+                                        link="https://calendly.com/abbeyfarmbusiness/"
                                         css="fill"
-                                    />
+                                        target="_blank"
+                                    /> */}
                                 </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ export default function Testimonial({ testimonials }) {
                                     fringilla bibendum lorem sed. Nec amet neque
                                     phasellus nec sollicitudin sit. Et ege
                                 </p>
-                                <Link className="inline-block bg-white text-c1 p-[10px] px-[30px] md:px-[40px] text-[16px] md:text-[18px] rounded-[50px] hover:bg-black hover:text-white transition-all duration-500 font-medium">
+                                <Link href={route("contact-us.index")} className="inline-block bg-white text-c1 p-[10px] px-[30px] md:px-[40px] text-[16px] md:text-[18px] rounded-[50px] hover:bg-black hover:text-white transition-all duration-500 font-medium">
                                     Contact Us
                                 </Link>
                             </div>

@@ -28,7 +28,7 @@ export default function Banner() {
                                             stress-free experience for both you
                                             and your pets.
                                         </p>
-                                        <Link className="border-2 border-white rounded-[50px] py-[10px] px-[20px] md:px-[30px] 2xl:px-[40px] flex items-center mx-auto lg:mx-0 w-max text-[16px] md:text-[18px] 2xl:text-[22px] text-white transition-all duration-500 hover:bg-white hover:text-c1 font-medium">
+                                        <Link href={route("contact-us.index")} className="border-2 border-white rounded-[50px] py-[10px] px-[20px] md:px-[30px] 2xl:px-[40px] flex items-center mx-auto lg:mx-0 w-max text-[16px] md:text-[18px] 2xl:text-[22px] text-white transition-all duration-500 hover:bg-white hover:text-c1 font-medium">
                                             Get a Quote
                                             <FaArrowRight className="ml-[10px] md:ml-[20px]" />
                                         </Link>
